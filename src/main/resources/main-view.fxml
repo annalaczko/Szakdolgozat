@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.shape.Circle?>
+<VBox id="vbox" prefHeight="400" prefWidth="800"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.annalaczko.onlab.controller.MainController">
+    <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
+        <menus>
+            <Menu text="File">
+                <items>
+                    <MenuItem text="New"/>
+                    <MenuItem text="Open"/>
+                    <SeparatorMenuItem  />
+                    <MenuItem text="Exit" onAction="#handleExitAction"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <children>
+        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="100.0" layoutY="200.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+    </children>
+
+</VBox>
+
