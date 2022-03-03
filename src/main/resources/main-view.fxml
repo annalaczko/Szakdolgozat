@@ -20,7 +20,7 @@
         </menus>
     </MenuBar>
     <children>
-        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="100.0" layoutY="200.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="robot" fill="DODGERBLUE" layoutX="100.0" layoutY="200.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
     </children>
 
 </VBox>
