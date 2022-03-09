@@ -13,7 +13,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -25,7 +25,8 @@ public class MainController implements Initializable
     private MenuBar menuBar;
 
     @FXML
-    private VBox vBox;
+    private AnchorPane anchorPane;
+
 
     @FXML
     private Circle robot;
@@ -43,10 +44,11 @@ public class MainController implements Initializable
 
         @Override
         public void handle(ActionEvent actionEvent) {
-            robot.setLayoutX(robot.getLayoutX() + deltaX);
-            robot.setLayoutY(robot.getLayoutY() + deltaY);
+            robot.setLayoutX(robot.getLayoutX() - deltaX);
+            robot.setLayoutY(robot.getLayoutY() - deltaY);
 
-            Bounds bounds = vBox.getBoundsInLocal();
+            Bounds bounds = anchorPane.getBoundsInLocal();
+            //System.out.println(bounds.getMinX()+"X"+bounds.getMaxX()+"/n"+bounds.getMinY()+"X"+bounds.getMaxY()+"/n");
             boolean rightBorder = robot.getLayoutX() >= (bounds.getMaxX() - robot.getRadius());
             boolean leftBorder = robot.getLayoutX() <= (bounds.getMinX() + robot.getRadius());
             boolean bottomBorder = robot.getLayoutY() >= (bounds.getMaxY() - robot.getRadius());
@@ -76,25 +78,25 @@ public class MainController implements Initializable
             final KeyEvent keyEvent = (KeyEvent) event;
             if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.A)
             {
-                provideAboutFunctionality();
+
             }
         }
     }
 
-    /**
-     * Perform functionality associated with "About" menu selection or CTRL-A.
-     */
-    private void provideAboutFunctionality()
-    {
-        System.out.println("You clicked on About!");
-    }
-
-
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
         menuBar.setFocusTraversable(true);
+
+
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
     }
+
+    @FXML
+    private void handleNewRoomAction (final ActionEvent event) throws Exception {
+        NewRoomWindow.start();
+    }
+
+
 }

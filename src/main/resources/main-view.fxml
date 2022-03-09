@@ -2,26 +2,37 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<?import javafx.scene.shape.Circle?>
-<VBox id="vbox" prefHeight="400" prefWidth="800"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.annalaczko.onlab.controller.MainController">
-    <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
+<BorderPane id="borderPane" prefHeight="800.0" prefWidth="1200" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.annalaczko.onlab.controller.MainController">
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
-            <Menu text="File">
-                <items>
-                    <MenuItem text="New"/>
-                    <MenuItem text="Open"/>
-                    <SeparatorMenuItem  />
-                    <MenuItem text="Exit" onAction="#handleExitAction"/>
-                </items>
-            </Menu>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="newRoom" mnemonicParsing="false" onAction="#handleNewRoomAction" text="New Room..." />
+              <MenuItem mnemonicParsing="false" onAction="#handleExitAction" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
         </menus>
-    </MenuBar>
-    <children>
-        <Circle fx:id="robot" fill="DODGERBLUE" layoutX="100.0" layoutY="200.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
-    </children>
-
-</VBox>
-
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+      
+              <Circle fx:id="robot" fill="DODGERBLUE" layoutX="376.0" layoutY="286.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
