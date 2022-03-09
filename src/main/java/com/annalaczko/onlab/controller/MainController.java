@@ -7,13 +7,16 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable
@@ -66,10 +69,18 @@ public class MainController implements Initializable
     }
 
     @FXML
-    public void handleLoadAction(){
+    public void handleLoadAction() throws IOException {
         pane=new Pane();
         pane.setPrefSize(RoomController.roomWidth,RoomController.roomHeight);
-        System.out.println(pane.getPrefHeight());
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+        Main.stage.setTitle("Robot");
+        Main.stage.setResizable(false);
+        Main.stage.setScene(scene);
+        Main.stage.close();
+        Main.stage.show();
+
         robot.setRadius(RoomController.robotRadius);
         robot.setCenterX(0);
         robot.setCenterY(pane.getLayoutY());
