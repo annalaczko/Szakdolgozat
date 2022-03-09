@@ -13,6 +13,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setTitle("Robot");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

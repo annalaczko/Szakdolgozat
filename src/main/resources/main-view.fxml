@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane id="borderPane" prefHeight="800.0" prefWidth="1200" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.annalaczko.onlab.controller.MainController">
+<BorderPane id="borderPane" fx:id="pane" maxHeight="800.0" maxWidth="1200.0" minHeight="40.0" minWidth="40.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.annalaczko.onlab.controller.MainController">
    <top>
       <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
@@ -12,6 +12,7 @@
             <items>
                   <MenuItem fx:id="newRoom" mnemonicParsing="false" onAction="#handleNewRoomAction" text="New Room..." />
                   <MenuItem mnemonicParsing="false" onAction="#handleLoadAction" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleStartAction" text="Start" />
               <MenuItem mnemonicParsing="false" onAction="#handleExitAction" text="Close" />
             </items>
           </Menu>
@@ -29,10 +30,10 @@
       </MenuBar>
    </top>
    <center>
-      <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+      <Pane cacheShape="false" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" scaleShape="false" style="-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Circle fx:id="robot" fill="DODGERBLUE" layoutX="39.0" layoutY="42.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="robot" fill="DODGERBLUE" layoutX="25.0" layoutY="25.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
-      </AnchorPane>
+      </Pane>
    </center>
 </BorderPane>

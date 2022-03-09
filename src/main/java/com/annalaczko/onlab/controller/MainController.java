@@ -25,39 +25,17 @@ public class MainController implements Initializable
     private Circle robot;
 
     @FXML
-    private AnchorPane anchorPane;
+    private Pane pane;
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 
-        double deltaX = 2;
-        double deltaY = 2;
-
         @Override
         public void handle(ActionEvent actionEvent) {
-            robot.setLayoutX(robot.getLayoutX() - deltaX);
-            robot.setLayoutY(robot.getLayoutY() - deltaY);
-
-            Bounds bounds = anchorPane.getBoundsInLocal();
-            boolean rightBorder = robot.getLayoutX() >= (bounds.getMaxX() - robot.getRadius());
-            boolean leftBorder = robot.getLayoutX() <= (bounds.getMinX() + robot.getRadius());
-            boolean bottomBorder = robot.getLayoutY() >= (bounds.getMaxY() - robot.getRadius());
-            boolean topBorder = robot.getLayoutY() <= (bounds.getMinY() + robot.getRadius());
-
-            if (rightBorder || leftBorder) {
-                deltaX *= -1;
-            }
-            if (bottomBorder || topBorder) {
-                deltaY *= -1;
-            }
+            Robot.move(10,270);
+            update();
         }
     }));
 
-
-   /*@Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }*/
 
     @FXML
     private void handleExitAction(final ActionEvent event)
@@ -69,10 +47,10 @@ public class MainController implements Initializable
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
         menuBar.setFocusTraversable(true);
-        anchorPane.setPrefWidth(1000);
-        anchorPane.setPrefHeight(600);
-        robot.setCenterY(0);
+        pane.setPrefWidth(1000);
+        pane.setPrefHeight(600);
         robot.setCenterX(0);
+        robot.setCenterY(pane.getPrefHeight()-robot.getRadius()*2);
 
     }
 
@@ -82,13 +60,24 @@ public class MainController implements Initializable
     }
 
     @FXML
-    public void handleLoadAction(){
-        anchorPane.setPrefHeight(RoomController.roomHeight);
-        anchorPane.setPrefWidth(RoomController.roomWidth);
-        robot.setRadius(RoomController.robotRadius);
-        robot.setCenterX(RoomController.robotRadius);
-        robot.setCenterY(RoomController.robotRadius);
+    private void handleStartAction (final ActionEvent event) throws Exception {
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
+    @FXML
+    public void handleLoadAction(){
+        pane=new Pane();
+        pane.setPrefSize(RoomController.roomWidth,RoomController.roomHeight);
+        System.out.println(pane.getPrefHeight());
+        robot.setRadius(RoomController.robotRadius);
+        robot.setCenterX(0);
+        robot.setCenterY(pane.getLayoutY());
+    }
+
+    private void update (){
+        robot.setCenterX(Robot.getX());
+        robot.setCenterY(Robot.getY());
+    }
 
 }
