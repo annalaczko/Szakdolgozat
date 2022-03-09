@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
 <BorderPane id="borderPane" prefHeight="800.0" prefWidth="1200" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.annalaczko.onlab.controller.MainController">
    <top>
@@ -28,6 +29,10 @@
       </MenuBar>
    </top>
    <center>
-      <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fx:id="robot" fill="DODGERBLUE" layoutX="39.0" layoutY="42.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>
