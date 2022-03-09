@@ -3,6 +3,7 @@ package com.annalaczko.onlab.model;
 
 public class Robot {
     private Coordinate location;
+    private int radius=25; //centimeters
     private double speed=1; //pixel per milliseconds
 
     public void move (double distance, double degree ){
