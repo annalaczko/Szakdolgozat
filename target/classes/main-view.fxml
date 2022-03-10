@@ -20,7 +20,7 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" onAction="#handleHelpAction" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
@@ -29,10 +29,10 @@
       </MenuBar>
    </top>
    <center>
-      <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Circle fx:id="robot" fill="DODGERBLUE" layoutX="39.0" layoutY="42.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="robot" fill="DODGERBLUE" layoutX="0" layoutY="0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
-      </AnchorPane>
+      </Pane>
    </center>
 </BorderPane>

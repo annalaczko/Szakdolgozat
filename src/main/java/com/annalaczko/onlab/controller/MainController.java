@@ -1,6 +1,5 @@
 package com.annalaczko.onlab.controller;
 
-import com.annalaczko.onlab.model.Robot;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -25,7 +24,7 @@ public class MainController implements Initializable
     private Circle robot;
 
     @FXML
-    private AnchorPane anchorPane;
+    private Pane pane;
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 
@@ -37,7 +36,7 @@ public class MainController implements Initializable
             robot.setLayoutX(robot.getLayoutX() - deltaX);
             robot.setLayoutY(robot.getLayoutY() - deltaY);
 
-            Bounds bounds = anchorPane.getBoundsInLocal();
+            Bounds bounds = pane.getBoundsInLocal();
             boolean rightBorder = robot.getLayoutX() >= (bounds.getMaxX() - robot.getRadius());
             boolean leftBorder = robot.getLayoutX() <= (bounds.getMinX() + robot.getRadius());
             boolean bottomBorder = robot.getLayoutY() >= (bounds.getMaxY() - robot.getRadius());
@@ -69,10 +68,12 @@ public class MainController implements Initializable
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
         menuBar.setFocusTraversable(true);
-        anchorPane.setPrefWidth(1000);
-        anchorPane.setPrefHeight(600);
+        pane.setPrefWidth(1000);
+        pane.setPrefHeight(600);
         robot.setCenterY(0);
         robot.setCenterX(0);
+        robot.setVisible(false);
+        pane.setVisible(false);
 
     }
 
@@ -83,12 +84,19 @@ public class MainController implements Initializable
 
     @FXML
     public void handleLoadAction(){
-        anchorPane.setPrefHeight(RoomController.roomHeight);
-        anchorPane.setPrefWidth(RoomController.roomWidth);
+        pane.setVisible(true);
+        robot.setVisible(true);
+        pane.setPrefHeight(RoomController.roomHeight);
+        pane.setPrefWidth(RoomController.roomWidth);
         robot.setRadius(RoomController.robotRadius);
         robot.setCenterX(RoomController.robotRadius);
         robot.setCenterY(RoomController.robotRadius);
     }
 
+
+    @FXML
+    public void handleHelpAction(){
+    System.out.println(robot.getCenterX()+"  "+ robot.getCenterY());
+    }
 
 }
