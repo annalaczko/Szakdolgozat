@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Onlab">
+    <output-path>$PROJECT_DIR$/out/artifacts/Onlab</output-path>
+    <root id="root">
+      <element id="archive" name="Onlab.jar">
+        <element id="module-output" name="Onlab" />
+      </element>
+    </root>
+  </artifact>
+</component>
