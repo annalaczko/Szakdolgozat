@@ -12,6 +12,7 @@
             <items>
                   <MenuItem fx:id="newRoom" mnemonicParsing="false" onAction="#handleNewRoomAction" text="New Room..." />
                   <MenuItem mnemonicParsing="false" onAction="#handleLoadAction" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleStartAction" text="Start" />
               <MenuItem mnemonicParsing="false" onAction="#handleExitAction" text="Close" />
             </items>
           </Menu>

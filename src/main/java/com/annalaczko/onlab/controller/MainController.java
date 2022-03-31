@@ -26,38 +26,6 @@ public class MainController implements Initializable
     @FXML
     private Pane pane;
 
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
-
-        double deltaX = 2;
-        double deltaY = 2;
-
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            robot.setLayoutX(robot.getLayoutX() - deltaX);
-            robot.setLayoutY(robot.getLayoutY() - deltaY);
-
-            Bounds bounds = pane.getBoundsInLocal();
-            boolean rightBorder = robot.getLayoutX() >= (bounds.getMaxX() - robot.getRadius());
-            boolean leftBorder = robot.getLayoutX() <= (bounds.getMinX() + robot.getRadius());
-            boolean bottomBorder = robot.getLayoutY() >= (bounds.getMaxY() - robot.getRadius());
-            boolean topBorder = robot.getLayoutY() <= (bounds.getMinY() + robot.getRadius());
-
-            if (rightBorder || leftBorder) {
-                deltaX *= -1;
-            }
-            if (bottomBorder || topBorder) {
-                deltaY *= -1;
-            }
-        }
-    }));
-
-
-   /*@Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }*/
-
     @FXML
     private void handleExitAction(final ActionEvent event)
     {
@@ -89,14 +57,23 @@ public class MainController implements Initializable
         pane.setPrefHeight(RoomController.roomHeight);
         pane.setPrefWidth(RoomController.roomWidth);
         robot.setRadius(RoomController.robotRadius);
-        robot.setCenterX(RoomController.robotRadius);
-        robot.setCenterY(RoomController.robotRadius);
+        robot.setCenterX(RoomController.robotCoordinate.getX());
+        robot.setCenterY(RoomController.robotCoordinate.getY());
     }
 
+    public void update(){
+        robot.setCenterX(RoomController.robotCoordinate.getX());
+        robot.setCenterY(RoomController.robotCoordinate.getY());
+    }
 
     @FXML
     public void handleHelpAction(){
-    System.out.println(robot.getCenterX()+"  "+ robot.getCenterY());
+        System.out.println(robot.getCenterX()+"  "+ robot.getCenterY());
     }
 
+    @FXML
+    public void handleStartAction(){
+        System.out.println("Start");
+        RoomController.moveRobot();
+    }
 }

@@ -9,24 +9,34 @@
          <center>
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="112.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="0.0" prefWidth="48.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="112.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="145.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="0.0" prefWidth="44.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="145.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="117.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="191.0" minHeight="3.0" prefHeight="24.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="roomWidth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label text=" x " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <TextField fx:id="roomHeight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button fx:id="buttonOK" mnemonicParsing="false" onAction="#handleOKAction" text="Ok" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="roomWidth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" />
+                        <Label text=" cm" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <TextField fx:id="roomHeight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="75.0" />
+                        <Label text=" cm" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </center>
          <top>
-            <Label prefHeight="24.0" prefWidth="265.0" text="Kérlek add meg a szoba méreteit centiméterben!" BorderPane.alignment="TOP_CENTER" />
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="265.0" text="Kérlek add meg a szoba méreteit!" BorderPane.alignment="TOP_CENTER" />
          </top>
       </BorderPane>
    </children>

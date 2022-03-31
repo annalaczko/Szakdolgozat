@@ -1,5 +1,6 @@
 package com.annalaczko.onlab.controller;
 
+import com.annalaczko.onlab.model.Robot;
 import com.annalaczko.onlab.model.Room;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,9 +23,13 @@ public class NewRoomWindowController implements Initializable
     }
     @FXML
     private void handleOKAction(){
-        if (roomHeight.getText()!=null&&roomWidth.getText()!=null) {
-            Room.setCorners(Integer.parseInt(roomWidth.getText()),Integer.parseInt(roomHeight.getText()));
-            RoomController.update();
+        int width=Integer.parseInt(roomWidth.getText());
+        int height=Integer.parseInt(roomHeight.getText());
+        if (height!=0 && width!=0) {
+            if  (height< Robot.getRadius()*2) height=Robot.getRadius()*2;
+            if  (width< Robot.getRadius()*2) width=Robot.getRadius()*2;
+            Room.setCorners(width, height);
+            RoomController.initialize();
             NewRoomWindow.getStage().close();
         }
     }
