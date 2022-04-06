@@ -43,7 +43,8 @@ public class MainController implements Initializable
         robot.setVisible(false);
         pane.setVisible(false);
 
-    }
+        //TODO képernyőfrissítés
+        }
 
     @FXML
     private void handleNewRoomAction (final ActionEvent event) throws Exception {
@@ -74,6 +75,17 @@ public class MainController implements Initializable
     @FXML
     public void handleStartAction(){
         System.out.println("Start");
+
+        Thread thread= new Thread(() -> {
+            update();
+            try {
+                Thread.sleep(10);
+                System.out.println("lol");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
         RoomController.moveRobot();
     }
 }

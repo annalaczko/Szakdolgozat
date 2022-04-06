@@ -10,7 +10,16 @@ public class Trapezoidal extends Thread{
     private double distanceX, distanceY;
 
     public void run(){
-        int degreeX=0, degreeY=90;
+        int degreeX=0, degreeY=90; //TODO x irányban nem kell
+
+        //TODO általános trapéznál más fenn és lenn a szög
+        //TODO init distance
+
+        distanceX=Room.getWidth()-Robot.getLocation().getX();
+        distanceY=Room.getHeight()-Robot.getLocation().getY();
+
+        System.out.println("X" + distanceX+ "Y"+ distanceY);
+
         while(distanceX>Robot.getRadius()*3){
             System.out.println(Robot.getLocation().getX() + "Run" + Robot.getLocation().getY());
             while(distanceY>Robot.getRadius()){
@@ -36,7 +45,7 @@ public class Trapezoidal extends Thread{
 
             RoomController.update();
 
-            degreeX+=180;
+            //degreeX+=180;
 
             degreeY+=180;
         }
