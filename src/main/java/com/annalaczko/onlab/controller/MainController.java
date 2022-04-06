@@ -32,6 +32,21 @@ public class MainController implements Initializable
         Platform.exit();
     }
 
+    private class WindowUpdate extends Thread{
+        public void run (){
+
+            while (true){
+                update();
+                System.out.println("megyeget");
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
 
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
@@ -42,8 +57,6 @@ public class MainController implements Initializable
         robot.setCenterX(0);
         robot.setVisible(false);
         pane.setVisible(false);
-
-        //TODO képernyőfrissítés
         }
 
     @FXML
@@ -76,16 +89,10 @@ public class MainController implements Initializable
     public void handleStartAction(){
         System.out.println("Start");
 
-        Thread thread= new Thread(() -> {
-            update();
-            try {
-                Thread.sleep(10);
-                System.out.println("lol");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
+        Thread t= new WindowUpdate();
+
+        t.start();
+
         RoomController.moveRobot();
     }
 }

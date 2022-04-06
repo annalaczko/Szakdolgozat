@@ -5,11 +5,14 @@ import java.awt.*;
 
 public class Robot {
     private static int radius=20; //centimeters
-    private static Point location= new Point(radius,radius);
+    private static Coordinate location= new Coordinate(radius,radius);
     private static double speed=0.2; //centimeters per 10 milliseconds
 
     public static void move (double degree ){
-        location.setLocation(location.getX()+Math.cos(Math.toRadians(degree))*speed,location.getY()+Math.sin(Math.toRadians(degree))*speed );
+        double x=  location.getX()+Math.cos(Math.toRadians(degree))*speed;
+        double y= location.getY()+Math.sin(Math.toRadians(degree))*speed;
+        location.setLocation(x,y);
+        System.out.println("MOVE");
     }
 
     public static int getRadius() {
@@ -21,7 +24,7 @@ public class Robot {
 
     }
 
-    public static Point getLocation() {
+    public static Coordinate getLocation() {
         return location;
     }
 }

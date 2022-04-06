@@ -1,9 +1,7 @@
 package com.annalaczko.onlab.controller;
 
+import com.annalaczko.onlab.model.*;
 import com.annalaczko.onlab.model.Robot;
-import com.annalaczko.onlab.model.Room;
-import com.annalaczko.onlab.model.Tetragon;
-import com.annalaczko.onlab.model.Trapezoidal;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,7 +23,7 @@ public class RoomController {
     public static double roomWidth;
     public static double roomHeight;
     public static double robotRadius;
-    public static Point  robotCoordinate;
+    public static Coordinate robotCoordinate;
 
     //private double maxPixelWidth=1000, maxPixelHeight;
 
@@ -36,11 +34,11 @@ public class RoomController {
         roomHeight=Room.getHeight()*roomToPixelsConstant;
         roomWidth=Room.getWidth()*roomToPixelsConstant;
         robotRadius= Robot.getRadius()*roomToPixelsConstant;
-        robotCoordinate=new Point ((int) (Robot.getLocation().getX()*roomToPixelsConstant), (int)(Robot.getLocation().getY()*roomToPixelsConstant));
+        robotCoordinate=new Coordinate((int) (Robot.getLocation().getX()*roomToPixelsConstant), (int)(Robot.getLocation().getY()*roomToPixelsConstant));
     }
 
     public static void update(){
-        robotCoordinate=new Point ((int) (Robot.getLocation().getX()*roomToPixelsConstant), (int)(Robot.getLocation().getY()*roomToPixelsConstant));
+        robotCoordinate=new Coordinate ((int) (Robot.getLocation().getX()*roomToPixelsConstant), (int)(Robot.getLocation().getY()*roomToPixelsConstant));
     }
 
     private static void calcConstant(){

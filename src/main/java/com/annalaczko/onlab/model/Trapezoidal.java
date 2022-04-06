@@ -18,20 +18,20 @@ public class Trapezoidal extends Thread{
         distanceX=Room.getWidth()-Robot.getLocation().getX();
         distanceY=Room.getHeight()-Robot.getLocation().getY();
 
-        System.out.println("X" + distanceX+ "Y"+ distanceY);
-
         while(distanceX>Robot.getRadius()*3){
             System.out.println(Robot.getLocation().getX() + "Run" + Robot.getLocation().getY());
             while(distanceY>Robot.getRadius()){
                 Robot.move(degreeY);
+                //System.out.println(Robot.getLocation().getX()+ "   " + Robot.getLocation().getY());
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 distanceY=Room.getHeight()-Robot.getLocation().getY(); //TODO: a trapéz oldalait kell itt megadni
+                RoomController.update();
             }
-            RoomController.update();
+
 
             while(distanceX>distanceX-Robot.getRadius()*2){
                 Robot.move(degreeX);
@@ -41,9 +41,10 @@ public class Trapezoidal extends Thread{
                     e.printStackTrace();
                 }
                 distanceX=Room.getWidth()-Robot.getLocation().getX(); //TODO: a trapéz oldalait kell itt megadni
+                RoomController.update();
             }
 
-            RoomController.update();
+
 
             //degreeX+=180;
 
