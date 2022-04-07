@@ -29,15 +29,17 @@ public class MainController implements Initializable
     @FXML
     private void handleExitAction(final ActionEvent event)
     {
+        thread.stop();
         Platform.exit();
     }
+
+    private WindowUpdate thread;
 
     private class WindowUpdate extends Thread{
         public void run (){
 
-            while (true){
+            while (this.isAlive()){
                 update();
-                System.out.println("megyeget");
                 try {
                     sleep(10);
                 } catch (InterruptedException e) {
@@ -87,11 +89,10 @@ public class MainController implements Initializable
 
     @FXML
     public void handleStartAction(){
-        System.out.println("Start");
 
-        Thread t= new WindowUpdate();
+        thread= new WindowUpdate();
 
-        t.start();
+        thread.start();
 
         RoomController.moveRobot();
     }

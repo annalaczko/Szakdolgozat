@@ -6,13 +6,12 @@ import java.awt.*;
 public class Robot {
     private static int radius=20; //centimeters
     private static Coordinate location= new Coordinate(radius,radius);
-    private static double speed=0.2; //centimeters per 10 milliseconds
+    private static double speed=1; //centimeters per 10 milliseconds
 
     public static void move (double degree ){
         double x=  location.getX()+Math.cos(Math.toRadians(degree))*speed;
         double y= location.getY()+Math.sin(Math.toRadians(degree))*speed;
         location.setLocation(x,y);
-        System.out.println("MOVE");
     }
 
     public static int getRadius() {
