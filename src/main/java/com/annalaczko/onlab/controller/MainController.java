@@ -26,6 +26,8 @@ public class MainController implements Initializable
     @FXML
     private Pane pane;
 
+    public static boolean isRunning=true;
+
     @FXML
     private void handleExitAction(final ActionEvent event)
     {
@@ -38,7 +40,7 @@ public class MainController implements Initializable
     private class WindowUpdate extends Thread{
         public void run (){
 
-            while (this.isAlive()){
+            while (isRunning){
                 update();
                 try {
                     sleep(10);

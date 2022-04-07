@@ -17,7 +17,7 @@ public class Trapezoidal extends Thread{
         distanceX=Room.getWidth()-Robot.getLocation().getX();
         distanceY=Room.getHeight()-Robot.getLocation().getY();
 
-        while( distanceX>=Robot.getRadius()*3){
+        while( distanceX>Robot.getRadius()*3){
             verticalMoving(degreeY);
             double constDistanceX=distanceX-Robot.getRadius()*2;
             horizontalMoving(degreeX, constDistanceX);
@@ -26,7 +26,9 @@ public class Trapezoidal extends Thread{
         verticalMoving(degreeY);
         horizontalMoving(degreeX, Robot.getRadius());
         degreeY*=-1;
+        System.out.println("itt");
         verticalMoving(degreeY);
+        MainController.isRunning=false;
 
     }
 
@@ -60,7 +62,6 @@ public class Trapezoidal extends Thread{
 
     public void horizontalMoving(double degreeX, double distance){
         while(distanceX>distance){
-            System.out.println("in");
             Robot.move(degreeX);
             try {
                 Thread.sleep(10);
@@ -76,8 +77,6 @@ public class Trapezoidal extends Thread{
 
     public Trapezoidal(Tetragon _tetragon){
         tetragon=_tetragon;
-
-
     }
 
 }

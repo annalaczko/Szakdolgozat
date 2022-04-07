@@ -16,6 +16,7 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RoomController {
@@ -24,6 +25,8 @@ public class RoomController {
     public static double roomHeight;
     public static double robotRadius;
     public static Coordinate robotCoordinate;
+    private static List<Tetragon> visualCells;
+    private static List<Tetragon> pathCells;
 
     //private double maxPixelWidth=1000, maxPixelHeight;
 
@@ -35,6 +38,8 @@ public class RoomController {
         roomWidth=Room.getWidth()*roomToPixelsConstant;
         robotRadius= Robot.getRadius()*roomToPixelsConstant;
         robotCoordinate=new Coordinate((int) (Robot.getLocation().getX()*roomToPixelsConstant), (int)(Robot.getLocation().getY()*roomToPixelsConstant));
+
+
     }
 
     public static void update(){

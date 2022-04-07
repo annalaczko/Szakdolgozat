@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Tetragon extends Polygon {
 
-    private int [] xpoints, ypoints;
+    //Sarkok jobb fentről óramutató iránya szerint sorban
 
     public Tetragon (){}
 

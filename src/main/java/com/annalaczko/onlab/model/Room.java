@@ -11,7 +11,7 @@ public class Room {
     private static int width;
     private static int height;
 
-    private List<Polygon> objects;
+    public static List<Polygon> objects;
 
     public static void setCorners (int _width, int _height){
 
