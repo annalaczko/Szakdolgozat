@@ -90,7 +90,7 @@ public class MainController implements Initializable
     }
 
     @FXML
-    public void handleStartAction(){
+    public void handleStartAction() throws Exception {
 
         thread= new WindowUpdate();
 

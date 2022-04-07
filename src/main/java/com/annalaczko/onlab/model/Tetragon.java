@@ -6,9 +6,10 @@ public class Tetragon extends Polygon {
 
     //Sarkok jobb fentről óramutató iránya szerint sorban
 
-    public Tetragon (){}
+     public double [] xpoints, ypoints;
 
-    public Tetragon(int[] _xpoints, int[] _ypoints) throws Exception {
+
+    public Tetragon(double [] _xpoints, double[] _ypoints) throws Exception {
         if (_xpoints.length!=4 || _ypoints.length!=4) throw new Exception("The number of coordinates doesn't equals to four");
         xpoints=_xpoints;
         ypoints=_ypoints;
@@ -24,9 +25,9 @@ public class Tetragon extends Polygon {
         return index;
     }
 
-    public Point getStartingPoint(){
+   /* public Point getStartingPoint(){
         Point corner= new Point (xpoints[getStartingCornerIndex()]+Robot.getRadius(), ypoints[getStartingCornerIndex()]+Robot.getRadius());
         //TODO:szögfelezővel kiszámolni a koordinátát
         return corner;
-    }
+    }*/
 }

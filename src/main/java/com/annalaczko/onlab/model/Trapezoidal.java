@@ -11,9 +11,15 @@ public class Trapezoidal extends Thread{
     private boolean isDone;
 
     public void run(){
-        int degreeX=0, degreeY=90;
+        double degreeX=0, degreeY=90, degreeXUp, degreeXDown;
 
+
+        //0-val osztás!!!!
+        degreeXUp=Math.toDegrees( Math.atan ( (tetragon.xpoints[1]-tetragon.xpoints[0])/(tetragon.ypoints[1]-tetragon.ypoints[0])));
         //TODO általános trapéznál más fenn és lenn a szög
+        degreeXDown=Math.toDegrees( Math.atan ( (tetragon.xpoints[3]-tetragon.xpoints[2])/(tetragon.ypoints[3]-tetragon.ypoints[2])));
+        System.out.println(degreeXUp +"UP is DOWN"+ degreeXDown);
+        degreeX=degreeXDown;
         distanceX=Room.getWidth()-Robot.getLocation().getX();
         distanceY=Room.getHeight()-Robot.getLocation().getY();
 
@@ -22,10 +28,16 @@ public class Trapezoidal extends Thread{
             double constDistanceX=distanceX-Robot.getRadius()*2;
             horizontalMoving(degreeX, constDistanceX);
             degreeY*=-1;
+
+            if (degreeX==degreeXDown) {
+                degreeX=degreeXUp;
+            }
+            else degreeX=degreeXDown;
         }
         verticalMoving(degreeY);
         horizontalMoving(degreeX, Robot.getRadius());
         degreeY*=-1;
+
         System.out.println("itt");
         verticalMoving(degreeY);
         MainController.isRunning=false;

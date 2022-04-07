@@ -50,8 +50,10 @@ public class RoomController {
         roomToPixelsConstant=Math.min(Double.valueOf(1000)/Room.getWidth(), Double.valueOf(600)/Room.getHeight());
     }
 
-    public static void moveRobot(){
-        Thread thread= new Trapezoidal(new Tetragon());
+    public static void moveRobot() throws Exception {
+        double [] x={0, roomWidth, roomWidth,0};
+        double [] y={0, 0, roomHeight, roomHeight};
+        Thread thread= new Trapezoidal(new Tetragon(x,y));
         thread.start();
     }
 
