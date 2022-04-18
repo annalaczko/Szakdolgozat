@@ -18,11 +18,11 @@ public class MainController implements Initializable
     @FXML
     private MenuBar menuBar;
 
-    @FXML
-    private Circle robot;
+    //@FXML
+    //private Circle robot;
 
     @FXML
-    private Pane pane;
+    private BorderPane borderPane;
 
     public static boolean isRunning=true;
 
@@ -53,12 +53,8 @@ public class MainController implements Initializable
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
         menuBar.setFocusTraversable(true);
-        pane.setPrefWidth(1000);
-        pane.setPrefHeight(600);
-        robot.setCenterY(0);
-        robot.setCenterX(0);
-        robot.setVisible(false);
-        pane.setVisible(false);
+
+
     }
 
     @FXML
@@ -68,27 +64,17 @@ public class MainController implements Initializable
 
     @FXML
     public void handleLoadAction(){
-        pane.setVisible(true);
-        robot.setVisible(true);
-        pane.setPrefHeight(RoomViewModel.height);
-        pane.setPrefWidth(RoomViewModel.width);
-        robot.setRadius(RobotViewModel.radius);
-        robot.setCenterX(RobotViewModel.location.getX());
-        robot.setCenterY(RobotViewModel.location.getY());
-
-        //System.out.println(RobotViewModel.radius +" "+RobotViewModel.location.getX()+" "+RobotViewModel.location.getY());
-
+        SceneController.initialize();
+        borderPane.setCenter(SceneController.pane);
     }
 
     public void update(){
-        robot.setCenterX(RobotViewModel.location.getX());
-        robot.setCenterY(RobotViewModel.location.getY());
+        SceneController.update();
     }
 
     @FXML
     public void handleHelpAction(){
-        System.out.println(robot.getCenterX()+"  "+ robot.getCenterY());
-    }
+   }
 
     @FXML
     public void handleStartAction() throws Exception {
