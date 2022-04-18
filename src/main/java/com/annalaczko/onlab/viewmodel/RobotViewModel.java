@@ -1,7 +1,7 @@
 package com.annalaczko.onlab.viewmodel;
 
 import com.annalaczko.onlab.model.*;
-import com.annalaczko.onlab.viewmodel.controllers.SceneController;
+import com.annalaczko.onlab.view.SceneView;
 
 public class RobotViewModel {
 
@@ -11,7 +11,7 @@ public class RobotViewModel {
     private static double roomToPixelsConstant;
 
     public static void initialize(){
-        roomToPixelsConstant= SceneController.calcConstant();
+        roomToPixelsConstant= SceneView.calcConstant();
         RobotModel.reset();
         radius = RobotModel.getRadius()*roomToPixelsConstant;
         location =new Coordinate((int) (RobotModel.getLocation().getX()*roomToPixelsConstant), (int)(RobotModel.getLocation().getY()*roomToPixelsConstant));

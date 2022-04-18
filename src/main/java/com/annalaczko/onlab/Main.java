@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.viewmodel;
+package com.annalaczko.onlab;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-//TODO sarokválasztás
 
 public class Main extends Application {
     @Override

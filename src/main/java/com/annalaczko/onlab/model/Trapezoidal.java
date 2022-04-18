@@ -16,8 +16,8 @@ public class Trapezoidal extends Thread{
     //////90/////
 
     public boolean isTooSmall (){
-        double distanceDown=getDistanceFromWall(tetragon.xpoints[2], tetragon.ypoints[2], tetragon.xpoints[3], tetragon.ypoints[3]);
-        double distanceUp=getDistanceFromWall(tetragon.xpoints[0], tetragon.ypoints[0], tetragon.xpoints[1], tetragon.ypoints[1]);
+        double distanceDown=getDistanceFromWall(tetragon.xpoints[2], tetragon.ypoints[2], tetragon.xpoints[3], tetragon.ypoints[3], RobotModel.getLocation().getX(), RobotModel.getLocation().getY());
+        double distanceUp=getDistanceFromWall(tetragon.xpoints[0], tetragon.ypoints[0], tetragon.xpoints[1], tetragon.ypoints[1], RobotModel.getLocation().getX(), RobotModel.getLocation().getY());
         return distanceDown<= RobotModel.getRadius() && distanceUp<= RobotModel.getRadius();
     }
 
@@ -98,14 +98,14 @@ public class Trapezoidal extends Thread{
 
     }
 
-    public double getDistanceFromWall (double x0, double y0, double x1, double y1){
+    public double getDistanceFromWall (double x0, double y0, double x1, double y1, double px, double py){
         double a=(y1-y0),b=(x0-x1),c=x0*y1-x1*y0;
-        return (Math.abs(RobotModel.getLocation().getX()*a+ RobotModel.getLocation().getY()*b-c))/Math.sqrt(a*a+b*b);
+        return (Math.abs(px*a+ py*b-c))/Math.sqrt(a*a+b*b);
     }
 
     public void verticalMoving(double degreeY){
         if (degreeY==90){
-            distanceY=getDistanceFromWall(tetragon.xpoints[2], tetragon.ypoints[2], tetragon.xpoints[3], tetragon.ypoints[3]);
+            distanceY=getDistanceFromWall(tetragon.xpoints[2], tetragon.ypoints[2], tetragon.xpoints[3], tetragon.ypoints[3], RobotModel.getLocation().getX(), RobotModel.getLocation().getY());
             while(distanceY> RobotModel.getRadius()){
                 RobotModel.move(degreeY);
                 try {
@@ -113,11 +113,11 @@ public class Trapezoidal extends Thread{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                distanceY=getDistanceFromWall(tetragon.xpoints[2], tetragon.ypoints[2], tetragon.xpoints[3], tetragon.ypoints[3]); //TODO: a trapéz oldalait kell itt megadni
+                distanceY=getDistanceFromWall(tetragon.xpoints[2], tetragon.ypoints[2], tetragon.xpoints[3], tetragon.ypoints[3], RobotModel.getLocation().getX(), RobotModel.getLocation().getY());
                 RobotViewModel.update();
             }
         } else if (degreeY==-90){
-            distanceY=getDistanceFromWall(tetragon.xpoints[0], tetragon.ypoints[0], tetragon.xpoints[1], tetragon.ypoints[1]);
+            distanceY=getDistanceFromWall(tetragon.xpoints[0], tetragon.ypoints[0], tetragon.xpoints[1], tetragon.ypoints[1], RobotModel.getLocation().getX(), RobotModel.getLocation().getY());
             while(distanceY> RobotModel.getRadius()){
                 RobotModel.move(degreeY);
                 try {
@@ -125,7 +125,7 @@ public class Trapezoidal extends Thread{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                distanceY=getDistanceFromWall(tetragon.xpoints[0], tetragon.ypoints[0], tetragon.xpoints[1], tetragon.ypoints[1]); //TODO: a trapéz oldalait kell itt megadni
+                distanceY=getDistanceFromWall(tetragon.xpoints[0], tetragon.ypoints[0], tetragon.xpoints[1], tetragon.ypoints[1], RobotModel.getLocation().getX(), RobotModel.getLocation().getY());
                 RobotViewModel.update();
             }
         }
@@ -141,9 +141,9 @@ public class Trapezoidal extends Thread{
             }
 
             if (corner==1 || corner == 2){
-                distanceX= RobotModel.getLocation().getX(); //TODO: a trapéz oldalait kell itt megadni
+                distanceX= RobotModel.getLocation().getX();
             }else{
-                distanceX=tetragon.xpoints[2]- RobotModel.getLocation().getX(); //TODO: a trapéz oldalait kell itt megadni
+                distanceX=tetragon.xpoints[2]- RobotModel.getLocation().getX();
             }
 
 

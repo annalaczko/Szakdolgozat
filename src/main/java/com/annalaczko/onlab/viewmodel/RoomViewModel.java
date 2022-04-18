@@ -1,7 +1,7 @@
 package com.annalaczko.onlab.viewmodel;
 
 import com.annalaczko.onlab.model.*;
-import com.annalaczko.onlab.viewmodel.controllers.SceneController;
+import com.annalaczko.onlab.view.SceneView;
 
 import java.util.List;
 
@@ -17,13 +17,9 @@ public class RoomViewModel {
     private static double roomToPixelsConstant;
 
     public static void initialize(){
-        roomToPixelsConstant= SceneController.calcConstant();
+        roomToPixelsConstant= SceneView.calcConstant();
         height = RoomModel.getHeight()*roomToPixelsConstant;
         width = RoomModel.getWidth()*roomToPixelsConstant;
        }
-
-
-
-
 
 }

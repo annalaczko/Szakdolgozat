@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.viewmodel.controllers;
+package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.model.RobotModel;
 import com.annalaczko.onlab.model.RoomModel;
@@ -6,20 +6,17 @@ import com.annalaczko.onlab.model.Tetragon;
 import com.annalaczko.onlab.model.Trapezoidal;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeType;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class SceneController {
+
+public class SceneView {
 
     public static Circle robot=new Circle();
 

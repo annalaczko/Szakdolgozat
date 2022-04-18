@@ -1,25 +1,20 @@
-package com.annalaczko.onlab.viewmodel.controllers;
+package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
-import com.annalaczko.onlab.viewmodel.RobotViewModel;
-import com.annalaczko.onlab.viewmodel.RoomViewModel;
+import com.annalaczko.onlab.view.SceneView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
 
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable
+public class MainView implements Initializable
 {
     @FXML
     private MenuBar menuBar;
-
-    //@FXML
-    //private Circle robot;
 
     @FXML
     private BorderPane borderPane;
@@ -53,8 +48,6 @@ public class MainController implements Initializable
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
         menuBar.setFocusTraversable(true);
-
-
     }
 
     @FXML
@@ -64,12 +57,12 @@ public class MainController implements Initializable
 
     @FXML
     public void handleLoadAction(){
-        SceneController.initialize();
-        borderPane.setCenter(SceneController.pane);
+        SceneView.initialize();
+        borderPane.setCenter(SceneView.pane);
     }
 
     public void update(){
-        SceneController.update();
+        SceneView.update();
     }
 
     @FXML
@@ -83,6 +76,6 @@ public class MainController implements Initializable
 
         thread.start();
 
-        SceneController.moveRobot();
+        SceneView.moveRobot();
     }
 }

@@ -21,12 +21,4 @@ public class Coordinate {
         X=x;
         Y=y;
     }
-
-    public void setX(double x) {
-        X = x;
-    }
-
-    public void setY(double y) {
-        Y = y;
-    }
 }

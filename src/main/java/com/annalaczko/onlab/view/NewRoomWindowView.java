@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.viewmodel.controllers;
+package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.model.RobotModel;
 import com.annalaczko.onlab.model.RoomModel;
@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NewRoomWindowController implements Initializable
+public class NewRoomWindowView implements Initializable
 {
     @FXML
     private TextField roomWidth;
@@ -21,9 +21,7 @@ public class NewRoomWindowController implements Initializable
     private TextField roomHeight;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
     @FXML
     private void handleOKAction(){
         int width=Integer.parseInt(roomWidth.getText());
