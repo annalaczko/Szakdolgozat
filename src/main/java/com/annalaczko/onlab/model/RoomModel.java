@@ -4,14 +4,14 @@ import java.awt.Polygon;
 
 import java.util.List;
 
-public class Room {
+public class RoomModel {
 
-    private static Polygon corners;
+    private Polygon corners;
 
     private static int width;
     private static int height;
 
-    public static List<Polygon> objects;
+    public List<Polygon> objects;
 
     public static void setCorners (int _width, int _height){
 
@@ -20,7 +20,13 @@ public class Room {
 
     }
 
+    public void addObject(Polygon newObject){
+        objects.add(newObject);
+    }
+
     public static double getWidth() {return width;}
     public static double getHeight() {return height;}
+
+
 
 }

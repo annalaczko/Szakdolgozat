@@ -1,6 +1,8 @@
-package com.annalaczko.onlab.viewmodel;
+package com.annalaczko.onlab.viewmodel.controllers;
 
-import com.annalaczko.onlab.model.Robot;
+import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
+import com.annalaczko.onlab.viewmodel.RobotViewModel;
+import com.annalaczko.onlab.viewmodel.RoomViewModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,27 +59,30 @@ public class MainController implements Initializable
         robot.setCenterX(0);
         robot.setVisible(false);
         pane.setVisible(false);
-        }
+    }
 
     @FXML
     private void handleNewRoomAction (final ActionEvent event) throws Exception {
-        NewRoomWindow.start();
+        NewRoomViewModel.start();
     }
 
     @FXML
     public void handleLoadAction(){
         pane.setVisible(true);
         robot.setVisible(true);
-        pane.setPrefHeight(RoomController.roomHeight);
-        pane.setPrefWidth(RoomController.roomWidth);
-        robot.setRadius(RoomController.robotRadius);
-        robot.setCenterX(RoomController.robotCoordinate.getX());
-        robot.setCenterY(RoomController.robotCoordinate.getY());
+        pane.setPrefHeight(RoomViewModel.height);
+        pane.setPrefWidth(RoomViewModel.width);
+        robot.setRadius(RobotViewModel.radius);
+        robot.setCenterX(RobotViewModel.location.getX());
+        robot.setCenterY(RobotViewModel.location.getY());
+
+        //System.out.println(RobotViewModel.radius +" "+RobotViewModel.location.getX()+" "+RobotViewModel.location.getY());
+
     }
 
     public void update(){
-        robot.setCenterX(RoomController.robotCoordinate.getX());
-        robot.setCenterY(RoomController.robotCoordinate.getY());
+        robot.setCenterX(RobotViewModel.location.getX());
+        robot.setCenterY(RobotViewModel.location.getY());
     }
 
     @FXML
@@ -92,6 +97,6 @@ public class MainController implements Initializable
 
         thread.start();
 
-        RoomController.moveRobot();
+        SceneController.moveRobot();
     }
 }

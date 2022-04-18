@@ -1,9 +1,7 @@
 package com.annalaczko.onlab.model;
 
 
-import java.awt.*;
-
-public class Robot {
+public class RobotModel {
     private static int radius=20; //centimeters
     private static Coordinate location=new Coordinate(radius, radius);
     private static int corner=2;
@@ -34,13 +32,13 @@ public class Robot {
                 location=new Coordinate(radius, radius);
                 break;
             case 1:
-                location=new Coordinate(Room.getWidth()-radius, radius);
+                location=new Coordinate(RoomModel.getWidth()-radius, radius);
                 break;
             case 2:
-                location=new Coordinate(Room.getWidth()-radius, Room.getHeight()-radius);
+                location=new Coordinate(RoomModel.getWidth()-radius, RoomModel.getHeight()-radius);
                 break;
             case 3:
-                location=new Coordinate(radius, Room.getHeight()-radius);
+                location=new Coordinate(radius, RoomModel.getHeight()-radius);
                 break;
             default:
                 System.out.println("Wrong corner in Robot!");
