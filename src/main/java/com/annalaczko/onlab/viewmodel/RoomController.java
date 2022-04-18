@@ -1,23 +1,9 @@
-package com.annalaczko.onlab.controller;
+package com.annalaczko.onlab.viewmodel;
 
 import com.annalaczko.onlab.model.*;
 import com.annalaczko.onlab.model.Robot;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
-import javafx.util.Duration;
 
-import java.awt.*;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class RoomController {
 
@@ -34,12 +20,11 @@ public class RoomController {
 
     public static void initialize(){
         calcConstant();
+        Robot.reset();
         roomHeight=Room.getHeight()*roomToPixelsConstant;
         roomWidth=Room.getWidth()*roomToPixelsConstant;
         robotRadius= Robot.getRadius()*roomToPixelsConstant;
         robotCoordinate=new Coordinate((int) (Robot.getLocation().getX()*roomToPixelsConstant), (int)(Robot.getLocation().getY()*roomToPixelsConstant));
-
-
     }
 
     public static void update(){
@@ -51,8 +36,12 @@ public class RoomController {
     }
 
     public static void moveRobot() throws Exception {
-        double [] x={0, roomWidth, roomWidth,0};
-        double [] y={0, 0, roomHeight, roomHeight};
+        //double [] x={0, roomWidth, roomWidth,0};
+        //double [] y={0, 0, roomHeight, roomHeight};
+
+        double [] x={0, Room.getWidth(), Room.getWidth(),0};
+        double [] y={0, 0, Room.getHeight()/3, Room.getHeight()};
+        Robot.reset();
         Thread thread= new Trapezoidal(new Tetragon(x,y));
         thread.start();
     }

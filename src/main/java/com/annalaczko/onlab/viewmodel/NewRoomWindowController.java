@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.controller;
+package com.annalaczko.onlab.viewmodel;
 
 import com.annalaczko.onlab.model.Robot;
 import com.annalaczko.onlab.model.Room;
@@ -28,6 +28,7 @@ public class NewRoomWindowController implements Initializable
         if (height!=0 && width!=0) {
             if  (height< Robot.getRadius()*2) height=Robot.getRadius()*2;
             if  (width< Robot.getRadius()*2) width=Robot.getRadius()*2;
+            Robot.reset();
             Room.setCorners(width, height);
             RoomController.initialize();
             NewRoomWindow.getStage().close();

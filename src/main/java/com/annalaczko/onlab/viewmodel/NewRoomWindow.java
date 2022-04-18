@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.controller;
+package com.annalaczko.onlab.viewmodel;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +11,7 @@ public class NewRoomWindow {
     public static void start() throws Exception {
         stage=new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(NewRoomWindow.class.getResource("/new-room-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(NewRoomWindow.class.getResource("/view/new-room-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 300, 80);
         stage.setTitle("New Room");
         stage.setScene(scene);

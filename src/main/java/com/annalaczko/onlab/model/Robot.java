@@ -5,7 +5,8 @@ import java.awt.*;
 
 public class Robot {
     private static int radius=20; //centimeters
-    private static Coordinate location= new Coordinate(radius,radius);
+    private static Coordinate location=new Coordinate(radius, radius);
+    private static int corner=2;
     private static double speed=1; //centimeters per 10 milliseconds
 
     public static void move (double degree ){
@@ -18,12 +19,34 @@ public class Robot {
         return radius;
     }
 
-    public static void walkTetragon(Polygon tetra) throws Exception {
-        if (tetra.npoints!=4) throw new Exception("Polygon is not a tetragon");
-
+    public static int getCorner() {
+        return corner;
     }
 
     public static Coordinate getLocation() {
         return location;
+    }
+
+    public static void reset(){
+
+        switch (corner){
+            case 0:
+                location=new Coordinate(radius, radius);
+                break;
+            case 1:
+                location=new Coordinate(Room.getWidth()-radius, radius);
+                break;
+            case 2:
+                location=new Coordinate(Room.getWidth()-radius, Room.getHeight()-radius);
+                break;
+            case 3:
+                location=new Coordinate(radius, Room.getHeight()-radius);
+                break;
+            default:
+                System.out.println("Wrong corner in Robot!");
+                break;
+        }
+
+
     }
 }
