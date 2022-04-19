@@ -1,9 +1,6 @@
 package com.annalaczko.onlab.view;
 
-import com.annalaczko.onlab.model.RobotModel;
-import com.annalaczko.onlab.model.RoomModel;
-import com.annalaczko.onlab.model.Tetragon;
-import com.annalaczko.onlab.model.Trapezoidal;
+import com.annalaczko.onlab.model.*;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
 import javafx.geometry.Insets;
@@ -61,7 +58,7 @@ public class SceneView {
     public static void moveRobot() throws Exception {
         double [] x={0, RoomModel.getWidth(), RoomModel.getWidth(),0};
         double [] y={0, 0, RoomModel.getHeight()/3, RoomModel.getHeight()};
-        Thread thread= new Trapezoidal(new Tetragon(x,y));
+        Thread thread= new Trapezoidal();
         thread.start();
 
     }
