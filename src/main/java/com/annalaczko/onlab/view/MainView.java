@@ -1,5 +1,6 @@
 package com.annalaczko.onlab.view;
 
+import com.annalaczko.onlab.model.RoomModel;
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
 import com.annalaczko.onlab.view.SceneView;
 import javafx.application.Platform;

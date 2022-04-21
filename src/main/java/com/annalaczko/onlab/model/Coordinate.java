@@ -21,4 +21,5 @@ public class Coordinate {
         X=x;
         Y=y;
     }
+
 }

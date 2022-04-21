@@ -55,7 +55,6 @@ public class Trapeze {
                 i3=3;
                 degreeY=-90;
                 distanceX=tetragon.xpoints[2]- RobotModel.getLocation().getX();
-                System.out.println("default");
                 break;
         }
 
@@ -67,7 +66,6 @@ public class Trapeze {
 
         degreeX=degree0;
 
-        System.out.println("0 " + degree0 + "    2 " + degree1);
 
         //0-val osztás!!!!
 

@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,12 +19,13 @@ public class SceneView {
     public static Circle robot=new Circle();
 
     public static Pane pane=new Pane();
+    public static ArrayList<Polygon> objects=new ArrayList<>();
 
-    public static List<Polygon> objects;
 
     public static void initialize() {
         initPane();
         initRobot();
+        initObjects();
     }
 
     public static void update(){
@@ -53,6 +55,19 @@ public class SceneView {
         robot.setStrokeType(StrokeType.INSIDE);
         robot.setStrokeWidth(RobotViewModel.radius/3);
         pane.getChildren().add(robot);
+    }
+
+    private static void initObjects(){
+
+        for (java.awt.Polygon object: RoomViewModel.getObjects()) {
+            double [] points= new double[object.npoints*2];
+            for (int i=0; i<object.npoints; i++){
+                points[2*i]= object.xpoints[i];
+                points[2*i+1]= object.ypoints[i];
+            }
+            objects.add(new Polygon(points));
+        }
+        pane.getChildren().addAll(objects);
     }
 
     public static void moveRobot() throws Exception {

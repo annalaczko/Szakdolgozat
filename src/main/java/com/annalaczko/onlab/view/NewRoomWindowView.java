@@ -31,6 +31,7 @@ public class NewRoomWindowView implements Initializable
             if  (width< RobotModel.getRadius()*2) width= RobotModel.getRadius()*2;
             NewRoomViewModel.getStage().close();
             RoomModel.setCorners(width, height);
+            RoomModel.addObject();
             RobotViewModel.initialize();
             RoomViewModel.initialize();
         }
