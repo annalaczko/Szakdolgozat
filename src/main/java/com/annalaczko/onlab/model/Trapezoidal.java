@@ -1,10 +1,6 @@
 package com.annalaczko.onlab.model;
 
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
-import com.annalaczko.onlab.viewmodel.RoomViewModel;
-
-import java.awt.*;
-import java.util.Optional;
 
 public class Trapezoidal extends Thread{
 
@@ -19,11 +15,9 @@ public class Trapezoidal extends Thread{
         }
 
         for (Tetragon tetragon: PathFinder.trapezes) {
-            id=reallocate(PathFinder.trapezes.get(0));
-            System.out.println(tetragon.xpoints[0]+" "+tetragon.xpoints[1]+" "+tetragon.xpoints[2]+" "+tetragon.xpoints[3]+" ");
-            System.out.println(tetragon.ypoints[0]+" "+tetragon.ypoints[1]+" "+tetragon.ypoints[2]+" "+tetragon.ypoints[3]+" ");
-            System.out.println();
-            trapeze=new Trapeze(PathFinder.trapezes.get(0), id);
+            id=reallocate(tetragon);
+            //System.out.println(id);
+            trapeze=new Trapeze(tetragon, id);
             trapeze.start();
         }
 
@@ -31,18 +25,17 @@ public class Trapezoidal extends Thread{
 
     private int reallocate(Tetragon trapeze){
         int id=0;
-        double dist=distance(trapeze.xpoints[0], trapeze.ypoints[0]);
-        for (int i=1; i<4;i++){
-            if (dist>distance(trapeze.xpoints[i], trapeze.ypoints[i])) {
-                dist=distance(trapeze.xpoints[i], trapeze.ypoints[i]);
+        double dist=distance(trapeze.getCornerForRobot(0).getX(), trapeze.getCornerForRobot(0).getY());
+        for (int i=0; i<4;i++){
+            ///TODO ha túl vékony a trapéz akkor lehet távolabb lesz a "jó" sarok mint egy másik
+            if (dist>distance(trapeze.getCornerForRobot(i).getX(), trapeze.getCornerForRobot(i).getY())) {
+                dist=distance(trapeze.getCornerForRobot(i).getX(), trapeze.getCornerForRobot(i).getY());
                 id=i;
             }
         }
-        System.out.println("RX"+RobotModel.getLocation().getX()+" RY"+ RobotModel.getLocation().getY());
-        System.out.println("ID"+id+ " x" + trapeze.xpoints[id]+" y "+ trapeze.ypoints[id]);
-        System.out.println("DIST" + dist);
+        System.out.println(id);
 
-        double degree=Math.toDegrees( Math.atan2 ((RobotModel.getLocation().getY()-trapeze.ypoints[id]), (RobotModel.getLocation().getX()-trapeze.xpoints[id])));
+        double degree=Math.toDegrees( Math.atan2 ((trapeze.getCornerForRobot(id).getY()-RobotModel.getLocation().getY()), (trapeze.getCornerForRobot(id).getX()-RobotModel.getLocation().getX())));
 
         while(dist>0) {
             RobotModel.move(degree);

@@ -24,8 +24,8 @@ public class RoomModel {
     public static void addObject(/*Polygon newObject*/){
        // objects.add(newObject);
 
-        int  [] xpoints={100, 210, 130} ;
-        int  [] ypoints={60, 90, 210 };
+        int  [] xpoints={50, 500, 240} ;
+        int  [] ypoints={60, 90, 460 };
 
         objects.add(new Polygon(xpoints,ypoints,3));
         //objects.add(new Polygon(xpoints2,ypoints2,5));

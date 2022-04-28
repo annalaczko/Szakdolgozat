@@ -25,9 +25,35 @@ public class Tetragon extends Polygon {
         return index;
     }
 
-   /* public Point getStartingPoint(){
-        Point corner= new Point (xpoints[getStartingCornerIndex()]+Robot.getRadius(), ypoints[getStartingCornerIndex()]+Robot.getRadius());
-        //TODO:szögfelezővel kiszámolni a koordinátát
-        return corner;
-    }*/
+    public Coordinate getCornerForRobot(int cornerIndex){
+        //double a=(y1-y0),b=(x0-x1),c=x0*y1-x1*y0;
+
+        int leftcorner, rightcorner;
+
+        if (cornerIndex>0 && cornerIndex<3){
+            leftcorner=cornerIndex+1;
+            rightcorner=cornerIndex-1;
+        } else if (cornerIndex==0){
+            leftcorner=1;
+            rightcorner=3;
+        } else {
+            leftcorner=0;
+            rightcorner=2;
+        }
+
+        double angle1 = Math.atan2(ypoints[cornerIndex]-ypoints[leftcorner], xpoints[cornerIndex]-xpoints[leftcorner]);
+        double angle2 = Math.atan2(ypoints[cornerIndex]-ypoints[rightcorner], xpoints[cornerIndex]-xpoints[rightcorner]);
+        double desiredAngle = (angle1 - angle2)/2;
+        double c = RobotModel.getRadius()/Math.sin(desiredAngle);
+
+        double bisectorAngle=desiredAngle+angle2;
+
+        double x= Math.cos(bisectorAngle)*c;
+        double y= Math.sin(bisectorAngle)*c;
+
+        //szögfelező
+
+
+        return new Coordinate(x+xpoints[cornerIndex],y+ypoints[cornerIndex]);
+    }
 }

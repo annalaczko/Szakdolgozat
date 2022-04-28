@@ -16,9 +16,6 @@ public class RobotViewModel {
         radius = RobotModel.getRadius()*roomToPixelsConstant;
         location =new Coordinate((int) (RobotModel.getLocation().getX()*roomToPixelsConstant), (int)(RobotModel.getLocation().getY()*roomToPixelsConstant));
 
-        System.out.println(radius +" "+location.getX()+" "+location.getY());
-        System.out.println(RobotModel.getRadius());
-
     }
 
     public static void update(){
