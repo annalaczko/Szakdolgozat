@@ -5,7 +5,7 @@ public class RobotModel {
     private static int radius=20; //centimeters
     private static Coordinate location=new Coordinate(radius, radius);
     private static int corner=0;
-    public static double speed=1; //centimeters per 10 milliseconds
+    public static double speed=3; //centimeters per 10 milliseconds
 
     public static void move (double degree ){
         double x=  location.getX()+Math.cos(Math.toRadians(degree))*speed;
