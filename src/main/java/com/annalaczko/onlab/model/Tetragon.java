@@ -8,6 +8,15 @@ public class Tetragon extends Polygon {
 
      public double [] xpoints, ypoints;
 
+    public Tetragon(Coordinate [] cs){
+        xpoints=new double[4];
+        ypoints=new double[4];
+        for (int i=0; i<4;i++){
+            xpoints[i]=cs[i].getX();
+            ypoints[i]=cs[i].getY();
+        }
+    }
+
 
     public Tetragon(double [] _xpoints, double[] _ypoints) throws Exception {
         if (_xpoints.length!=4 || _ypoints.length!=4) throw new Exception("The number of coordinates doesn't equals to four");
@@ -55,5 +64,20 @@ public class Tetragon extends Polygon {
 
 
         return new Coordinate(x+xpoints[cornerIndex],y+ypoints[cornerIndex]);
+    }
+
+    @Override
+    public boolean contains(double x, double y) {
+
+        super.xpoints=new int [4];
+        super.ypoints=new int [4];
+
+        for (int i=0; i<4; i++){
+            super.xpoints[i] = (int) xpoints[i];
+            super.ypoints[i] = (int) ypoints[i];
+        }
+        System.out.println(super.xpoints[0]+ "super");
+
+        return super.contains(x, y);
     }
 }

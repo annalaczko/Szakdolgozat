@@ -37,7 +37,7 @@ public class MainView implements Initializable
             while (isRunning){
                 update();
                 try {
-                    sleep(10);
+                    sleep(40);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
