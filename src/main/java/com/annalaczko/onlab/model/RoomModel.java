@@ -34,5 +34,20 @@ public class RoomModel {
     public static double getWidth() {return width;}
     public static double getHeight() {return height;}
 
+    public static Coordinate getCorner(int id){
+        switch (id){
+            case 0:
+                return new Coordinate(0,0);
+            case 1:
+                return new Coordinate(width,0);
+            case 2:
+                return new Coordinate(width,height);
+            case 3:
+                return new Coordinate(0,height);
+            default:
+                return null;
+        }
+    }
+
 
 }
