@@ -2,13 +2,12 @@ package com.annalaczko.onlab.model;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class PathFinder {
     public static boolean[][] neighbourMatrix;
-    public static ArrayList<Tetragon> trapezes=new ArrayList<>();
+    public static ArrayList<Trapeze> trapezes=new ArrayList<>();
     private static ArrayList<Coordinate> coordinates=new ArrayList<>();
-    public static ArrayList<Tetragon> finaltrapezes=new ArrayList<>();
+    public static ArrayList<Trapeze> finaltrapezes=new ArrayList<>();
 
     private static void resetMatrix(){
         neighbourMatrix= new boolean[trapezes.size()][trapezes.size()];
@@ -23,7 +22,9 @@ public class PathFinder {
         for (int i=0; i<coordinates.size(); i++) {
             if (i==0) {
                 Coordinate [] cs={RoomModel.getCorner(0), new Coordinate(coordinates.get(0).getX(),0), new Coordinate(coordinates.get(0).getX(),RoomModel.getHeight()), RoomModel.getCorner(3)};
-                trapezes.add(new Tetragon(cs));
+                Trapeze t = new Trapeze(cs);
+                t.isEnd=true;
+                trapezes.add(t);
                 System.out.println("elso");
             } else if (i==coordinates.size()-1){
                 Coordinate [] cs={
@@ -32,7 +33,7 @@ public class PathFinder {
                         new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
                         new Coordinate(coordinates.get(i-2).getX(),coordinates.get(i-2).getY())
                 };
-                trapezes.add(new Tetragon(cs));
+                trapezes.add(new Trapeze(cs));
                 System.out.println("utolso");
             } else if(coordinates.get(i).getY()<coordinates.get(i+1).getY()){
                 Coordinate [] cs={
@@ -41,7 +42,7 @@ public class PathFinder {
                         new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
                         new Coordinate(coordinates.get(i-1).getX(),coordinates.get(i-1).getY())
                 };
-                trapezes.add(new Tetragon(cs));
+                trapezes.add(new Trapeze(cs));
 
                 Coordinate [] cs2={
                         new Coordinate(coordinates.get(i).getX(),0),
@@ -49,7 +50,7 @@ public class PathFinder {
                         new Coordinate(coordinates.get(i+1).getX(),coordinates.get(i+1).getY()),
                         new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY())
                 };
-                trapezes.add(new Tetragon(cs2));
+                trapezes.add(new Trapeze(cs2));
             } else{
                 Coordinate [] cs={
                         new Coordinate(coordinates.get(i-1).getX(),coordinates.get(i-1).getY()),
@@ -57,7 +58,7 @@ public class PathFinder {
                         new Coordinate(coordinates.get(i).getX(),RoomModel.getHeight()),
                         new Coordinate(coordinates.get(i-1).getX(),RoomModel.getHeight())
                 };
-                trapezes.add(new Tetragon(cs));
+                trapezes.add(new Trapeze(cs));
 
                 Coordinate [] cs2={
                         new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
@@ -65,11 +66,13 @@ public class PathFinder {
                         new Coordinate(coordinates.get(i+1).getX(),RoomModel.getHeight()),
                         new Coordinate(coordinates.get(i).getX(),RoomModel.getHeight())
                 };
-                trapezes.add(new Tetragon(cs2));
+                trapezes.add(new Trapeze(cs2));
             }
         }
         Coordinate [] cs={new Coordinate(coordinates.get(coordinates.size()-1).getX(),0), RoomModel.getCorner(1), RoomModel.getCorner(2), new Coordinate(coordinates.get(coordinates.size()-1).getX(),RoomModel.getHeight())};
-        trapezes.add(new Tetragon(cs));
+        Trapeze t = new Trapeze(cs);
+        t.isEnd=true;
+        trapezes.add(t);
     }
 
     public static void initMatrix(){
@@ -77,14 +80,16 @@ public class PathFinder {
         for (int i=0; i<trapezes.size();i++) {
            for (int j=0; j<trapezes.size();j++) {
                int nc=0;
+               if(trapezes.get(i).isEnd || trapezes.get(j).isEnd) nc++;
                for (int t1i=0; t1i<4; t1i++) {
+
                    for (int t2i=0; t2i<4; t2i++) {
-                       if (trapezes.get(i).xpoints[t1i]==trapezes.get(j).xpoints[t2i] && trapezes.get(i).ypoints[t1i]==trapezes.get(j).ypoints[t2i] ){
+                       if (trapezes.get(i).xpoints[t1i]==trapezes.get(j).xpoints[t2i] && trapezes.get(i).ypoints[t1i] == trapezes.get(j).ypoints[t2i]) {
                            nc++;
                        }
                    }
                }
-               if (nc>0){
+               if (nc>1){
                    neighbourMatrix [i] [j]=true;
                }
             }
@@ -113,7 +118,8 @@ public class PathFinder {
             for (int i = 0; i < trapezes.size(); i++) {
                 if (id!=i && neighbourMatrix[id][i] && !alltrue[i]){
 
-                    id=i;finaltrapezes.add(trapezes.get(id));
+                    id=i;
+                    finaltrapezes.add(trapezes.get(id));
                     alltrue[id]=true;
                     System.out.println(id);
                     break;

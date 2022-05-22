@@ -4,7 +4,7 @@ import com.annalaczko.onlab.viewmodel.RobotViewModel;
 
 public class Trapezoidal extends Thread{
 
-    Trapeze trapeze;
+    ZigZag zigZag;
     int id;
     @Override
     public void run() {
@@ -15,23 +15,23 @@ public class Trapezoidal extends Thread{
         }
 
 
-        Tetragon lasttetragon=null;
+        Trapeze lasttetragon=null;
 
-        for (Tetragon tetragon: PathFinder.trapezes) {
+        for (Trapeze trapeze : PathFinder.finaltrapezes) {
             if (lasttetragon!=null)
             {
-                id=reallocate(tetragon, lasttetragon);
+                id=reallocate(trapeze, lasttetragon);
             }
 
             //System.out.println(id);
-            trapeze=new Trapeze(tetragon, id);
-            trapeze.start();
-            lasttetragon=tetragon;
+            zigZag =new ZigZag(trapeze, id);
+            zigZag.start();
+            lasttetragon= trapeze;
         }
 
     }
 
-    private int reallocate(Tetragon newTrapeze, Tetragon lastTrapeze){
+    private int reallocate(Trapeze newTrapeze, Trapeze lastTrapeze){
         int id=0;
 
 
