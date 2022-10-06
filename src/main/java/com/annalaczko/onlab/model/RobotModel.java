@@ -1,5 +1,8 @@
 package com.annalaczko.onlab.model;
 
+/**
+ * Class for the robot
+ */
 
 public class RobotModel {
     private static int radius=20; //centimeters

@@ -121,7 +121,6 @@ public class PathFinder {
                     id=i;
                     finaltrapezes.add(trapezes.get(id));
                     alltrue[id]=true;
-                    System.out.println(id);
                     break;
                 }
             }

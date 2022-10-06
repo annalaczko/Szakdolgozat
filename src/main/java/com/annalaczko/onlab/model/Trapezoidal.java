@@ -6,6 +6,11 @@ public class Trapezoidal extends Thread{
 
     ZigZag zigZag;
     int id;
+
+    /*
+    Körbe
+     */
+
     @Override
     public void run() {
         try {
@@ -13,7 +18,6 @@ public class Trapezoidal extends Thread{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         Trapeze lasttetragon=null;
 
@@ -50,8 +54,6 @@ public class Trapezoidal extends Thread{
         }
 
         dist=distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY()));
-
-
 
         double degree=Math.toDegrees( Math.atan2 ((newTrapeze.getCornerForRobot(id).getY()-RobotModel.getLocation().getY()), (xforRobot-RobotModel.getLocation().getX())));
 
