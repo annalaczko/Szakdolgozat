@@ -26,7 +26,7 @@ public class Trapeze extends Polygon {
         ypoints=_ypoints;
     }
 
-    private int getStartingCornerIndex(){
+    private int getStartingCornerIndex(){ //???
         int index=0;
         for (int i=1; i <4 ;  i++){
             if (xpoints[index]<=xpoints[i] && ypoints[index]>=ypoints[i]){

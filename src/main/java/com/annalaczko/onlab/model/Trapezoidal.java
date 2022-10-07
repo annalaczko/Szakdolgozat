@@ -24,7 +24,7 @@ public class Trapezoidal extends Thread{
         for (Trapeze trapeze : PathFinder.finaltrapezes) {
             if (lasttetragon!=null)
             {
-                id=reallocate(trapeze, lasttetragon);
+                id=reallocate(trapeze, lasttetragon); //következő trapézhoz megy
             }
 
             //System.out.println(id);

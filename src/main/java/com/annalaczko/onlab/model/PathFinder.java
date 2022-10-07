@@ -3,12 +3,19 @@ package com.annalaczko.onlab.model;
 import java.awt.*;
 import java.util.*;
 
+/**
+ *
+ */
 public class PathFinder {
-    public static boolean[][] neighbourMatrix;
-    public static ArrayList<Trapeze> trapezes=new ArrayList<>();
-    private static ArrayList<Coordinate> coordinates=new ArrayList<>();
-    public static ArrayList<Trapeze> finaltrapezes=new ArrayList<>();
 
+    public static boolean[][] neighbourMatrix; //trapézok szomszédsági mátrixa
+    public static ArrayList<Trapeze> trapezes=new ArrayList<>(); //trapézok listája
+    private static ArrayList<Coordinate> coordinates=new ArrayList<>();
+    public static ArrayList<Trapeze> finaltrapezes=new ArrayList<>(); //trapézok listája sorrendben ahogyan majd végig megy a robot.
+
+    /**
+     * reseteli a szomszédsági mátrixot
+     */
     private static void resetMatrix(){
         neighbourMatrix= new boolean[trapezes.size()][trapezes.size()];
         for (int i=0; i< trapezes.size(); i++){
@@ -75,6 +82,10 @@ public class PathFinder {
         trapezes.add(t);
     }
 
+    /**
+     * Szomszédsági mátrix felépítése
+     */
+
     public static void initMatrix(){
 
         for (int i=0; i<trapezes.size();i++) {
@@ -83,7 +94,7 @@ public class PathFinder {
                if(trapezes.get(i).isEnd || trapezes.get(j).isEnd) nc++;
                for (int t1i=0; t1i<4; t1i++) {
 
-                   for (int t2i=0; t2i<4; t2i++) {
+                   for (int t2i=0; t2i<4; t2i++) { //a probléma itt, hogy egyesével nézem a koordinátákat és nem látom, hogy vajon egymás mellett vannak-e a koordináták. Ennek a poligonok miatt változnia is kéne..?
                        if (trapezes.get(i).xpoints[t1i]==trapezes.get(j).xpoints[t2i] && trapezes.get(i).ypoints[t1i] == trapezes.get(j).ypoints[t2i]) {
                            nc++;
                        }
@@ -96,6 +107,10 @@ public class PathFinder {
         }
     }
 
+    /**
+     * inicializáljuk az értékeket, kiszámoljuk az utat
+     * @throws Exception
+     */
     public static void Calculate() throws Exception {
 
         initCoordinates();
@@ -106,17 +121,18 @@ public class PathFinder {
         hamilton();
     }
 
-    public static void hamilton (){
+    public static void hamilton (){ //ez hamilton??
         int id=0;
         boolean [] alltrue=new boolean[trapezes.size()];
         for (int i = 0; i < alltrue.length; i++) {
             alltrue[i]=false;
         }
-        finaltrapezes.add(trapezes.get(id));alltrue[id]=true;
+        finaltrapezes.add(trapezes.get(id));
+        alltrue[id]=true;
         while (!allTrue(alltrue)){
 
             for (int i = 0; i < trapezes.size(); i++) {
-                if (id!=i && neighbourMatrix[id][i] && !alltrue[i]){
+                if (id!=i && neighbourMatrix[id][i] && !alltrue[i]){ //ha nem ugyanaz a trapéz kerül sorra, de szomszédosak és még nem jártunk a trapézban
 
                     id=i;
                     finaltrapezes.add(trapezes.get(id));
@@ -128,6 +144,11 @@ public class PathFinder {
 
     }
 
+    /**
+     * Ellenőrzi hogy voltunk-e mindegyik trapéznál
+     * @param trap trapéz db számú boolean tömb. igaz ha voltunk már ott
+     * @return
+     */
     public static boolean allTrue(boolean [] trap){
         for (int i = 0; i < trapezes.size(); i++) {
             if (!trap[i]){
@@ -136,8 +157,10 @@ public class PathFinder {
         }
         return true;
     }
-    //private static void
 
+    /**
+     * az összes objektum koordinátáit felveszi majd x kooridináta alapján sorrendezi
+     */
     public static void initCoordinates(){
         for (Polygon object: RoomModel.objects) {
             for (int i=0; i<object.npoints;i++){

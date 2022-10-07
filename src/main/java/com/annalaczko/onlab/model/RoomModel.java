@@ -3,7 +3,10 @@ package com.annalaczko.onlab.model;
 import java.awt.Polygon;
 
 import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * Szoba backendje
+ */
 
 public class RoomModel {
 
@@ -14,12 +17,22 @@ public class RoomModel {
 
     public static ArrayList<Polygon> objects=new ArrayList<>();
 
+    /**
+     * Szoba inicializálása
+     * @param _width
+     * @param _height
+     */
+
     public static void setCorners (int _width, int _height){
 
         width=_width;
         height=_height;
 
     }
+
+    /**
+     * TODO: ez mi
+     */
 
     public static void addObject(/*Polygon newObject*/){
        // objects.add(newObject);
@@ -33,6 +46,12 @@ public class RoomModel {
 
     public static double getWidth() {return width;}
     public static double getHeight() {return height;}
+
+    /**
+     * Visszaadja Coordinate osztályban a sarkait a szobának.
+     * @param id sarok sorszáma. bal felül kezd
+     * @return
+     */
 
     public static Coordinate getCorner(int id){
         switch (id){
