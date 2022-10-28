@@ -1,7 +1,5 @@
 package com.annalaczko.onlab.model;
 
-import java.awt.Polygon;
-
 import java.util.ArrayList;
 
 /**
@@ -37,10 +35,10 @@ public class RoomModel {
     public static void addObject(/*Polygon newObject*/){
        // objects.add(newObject);
 
-        int  [] xpoints={0, 0, 0} ;
-        int  [] ypoints={0, 0, 0 };
+        int  [] xpoints={100, 300, 400, 200} ;
+        int  [] ypoints={100, 200, 500, 600 };
 
-        objects.add(new Polygon(xpoints,ypoints,3));
+        objects.add(new Polygon(xpoints,ypoints,4));
         //objects.add(new Polygon(xpoints2,ypoints2,5));
     }
 

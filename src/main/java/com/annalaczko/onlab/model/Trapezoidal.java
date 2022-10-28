@@ -2,6 +2,8 @@ package com.annalaczko.onlab.model;
 
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 
+import java.nio.file.Path;
+
 public class Trapezoidal extends Thread{
 
     ZigZag zigZag;
@@ -21,16 +23,19 @@ public class Trapezoidal extends Thread{
 
         Trapeze lasttetragon=null;
 
-        for (Trapeze trapeze : PathFinder.finaltrapezes) {
+        for (int i=0; i<PathFinder.finaltrapezes.size();i++) {
             if (lasttetragon!=null)
             {
-                id=reallocate(trapeze, lasttetragon); //következő trapézhoz megy
+                id=reallocate(PathFinder.finaltrapezes.get(i), lasttetragon); //következő trapézhoz megy
             }
 
+            if (!PathFinder.havebeenhere[i]) {
+                zigZag =new ZigZag(PathFinder.finaltrapezes.get(i), id);
+                zigZag.start();
+            }
             //System.out.println(id);
-            zigZag =new ZigZag(trapeze, id);
-            zigZag.start();
-            lasttetragon= trapeze;
+
+            lasttetragon= PathFinder.finaltrapezes.get(i);
         }
 
     }

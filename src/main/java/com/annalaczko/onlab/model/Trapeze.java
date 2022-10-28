@@ -8,7 +8,7 @@ public class Trapeze extends Polygon {
 
     public boolean isEnd=false;
 
-     public double [] xpoints, ypoints;
+    public double [] xpoints, ypoints;
 
     public Trapeze(Coordinate [] cs){
         xpoints=new double[4];
