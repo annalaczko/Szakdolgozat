@@ -23,8 +23,7 @@ public class RoomViewModel {
         height = RoomModel.getHeight()*roomToPixelsConstant;
         width = RoomModel.getWidth()*roomToPixelsConstant;
         initObjects();
-
-       }
+    }
 
     public static List<Polygon> getObjects() {
         return objects;
@@ -45,6 +44,21 @@ public class RoomViewModel {
             objects.add(new Polygon(xpoints,ypoints,npoints));
         }
 
-       }
+    }
 
+    public static void setWidth(double width) {
+        RoomViewModel.width = width;
+    }
+
+    public static void setHeight(double height) {
+        RoomViewModel.height = height;
+    }
+
+    public static double getWidth() {
+        return width;
+    }
+
+    public static double getHeight() {
+        return height;
+    }
 }

@@ -1,5 +1,6 @@
 package com.annalaczko.onlab.view;
 
+import com.annalaczko.onlab.model.OrientationConverter;
 import com.annalaczko.onlab.model.Polygon;
 import com.annalaczko.onlab.model.RobotModel;
 import com.annalaczko.onlab.model.RoomModel;
@@ -8,6 +9,7 @@ import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -27,6 +29,9 @@ public class NewRoomWindowView implements Initializable
     private TextField x3;
     @FXML
     private TextField y3;
+
+    @FXML
+    private CheckBox IsTurnedOver;
 
     @FXML
     private TextField roomWidth;
@@ -57,5 +62,12 @@ public class NewRoomWindowView implements Initializable
 
         RobotViewModel.initialize();
         RoomViewModel.initialize();
+
+        //RoomModel.sortObjects();
+        System.out.println("Number OF CORNERS:" + RoomModel.objects.get(0).npoints);
+
+        if (IsTurnedOver.isSelected()) OrientationConverter.convert();
+
+
     }
 }

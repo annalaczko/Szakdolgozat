@@ -1,6 +1,8 @@
 package com.annalaczko.onlab.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Szoba backendje
@@ -28,15 +30,11 @@ public class RoomModel {
 
     }
 
-    /**
-     * TODO: ez mi
-     */
-
     public static void addObject(/*Polygon newObject*/){
        // objects.add(newObject);
 
-        int  [] xpoints={100, 300, 400, 200} ;
-        int  [] ypoints={100, 200, 500, 600 };
+        int  [] xpoints={200, 700, 600, 100} ;
+        int  [] ypoints={200, 100, 500, 400 };
 
         objects.add(new Polygon(xpoints,ypoints,4));
         //objects.add(new Polygon(xpoints2,ypoints2,5));
@@ -44,6 +42,14 @@ public class RoomModel {
 
     public static double getWidth() {return width;}
     public static double getHeight() {return height;}
+
+    public static void setHeight(int height) {
+        RoomModel.height = height;
+    }
+
+    public static void setWidth(int width) {
+        RoomModel.width = width;
+    }
 
     /**
      * Visszaadja Coordinate osztályban a sarkait a szobának.
@@ -67,4 +73,12 @@ public class RoomModel {
     }
 
 
+    public static void sortObjects(){
+        Collections.sort(objects, new Comparator<Polygon>() {
+            @Override
+            public int compare(Polygon o1, Polygon o2) {
+                return Double.compare(o1.getFirstCorner().getY(), o2.getFirstCorner().getY());
+            }
+        });
+    }
 }

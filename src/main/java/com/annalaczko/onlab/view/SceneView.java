@@ -4,6 +4,7 @@ import com.annalaczko.onlab.model.*;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
 import javafx.geometry.Insets;
+import javafx.scene.PointLight;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -21,6 +22,9 @@ public class SceneView {
     public static Pane pane=new Pane();
     public static ArrayList<Polygon> objects=new ArrayList<>();
 
+    public static boolean turned;
+    public static int iteration = 0;
+
 
     public static void initialize() {
         initPane();
@@ -29,18 +33,21 @@ public class SceneView {
     }
 
     public static void update(){
-        robot.setCenterX(RobotViewModel.location.getX());
-        robot.setCenterY(RobotViewModel.location.getY());
+        iteration++;
+        robot.setCenterX(RobotViewModel.location.getY());
+        robot.setCenterY(RobotViewModel.location.getX());
     }
 
     private static void initPane(){
-        pane.setVisible(true);
+
         pane.setMinHeight(RoomViewModel.height);
         pane.setMinWidth(RoomViewModel.width);
         pane.setMaxHeight(RoomViewModel.height);
         pane.setMaxWidth(RoomViewModel.width);
         pane.setPrefHeight(RoomViewModel.height);
         pane.setPrefWidth(RoomViewModel.width);
+
+        pane.setVisible(true);
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), Insets.EMPTY)));
         pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
     }
@@ -57,6 +64,19 @@ public class SceneView {
         pane.getChildren().add(robot);
     }
 
+    private static void addCircle(){
+        Circle way= new Circle();
+        way.setVisible(true);
+        way.setRadius(1);
+        way.setCenterX(RobotViewModel.location.getX());
+        way.setCenterY(RobotViewModel.location.getY());
+        way.setFill(Color.DARKRED);
+        way.setStrokeType(StrokeType.INSIDE);
+        way.setStrokeWidth(1);
+        pane.getChildren().add(way);
+        System.out.println("benn");
+    }
+
     private static void initObjects(){
 
         for (java.awt.Polygon object: RoomViewModel.getObjects()) {
@@ -70,9 +90,7 @@ public class SceneView {
         pane.getChildren().addAll(objects);
     }
 
-    public static void moveRobot() throws Exception {
-        double [] x={0, RoomModel.getWidth(), RoomModel.getWidth(),0};
-        double [] y={0, 0, RoomModel.getHeight()/3, RoomModel.getHeight()};
+    public static void moveRobot() {
         Thread thread= new Trapezoidal();
         thread.start();
 

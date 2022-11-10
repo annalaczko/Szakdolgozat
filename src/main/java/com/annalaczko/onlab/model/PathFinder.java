@@ -3,7 +3,6 @@ package com.annalaczko.onlab.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  *
@@ -33,7 +32,6 @@ public class PathFinder {
         double x = object.coordinatesInOrder.get(j).getX();
         double y = object.coordinatesInOrder.get(j).getY();
         Coordinate [] cs=new Coordinate[4];
-        Trapeze t;
         if (j == 0) {
             if (i == 0) {
                 cs =new Coordinate[] {
@@ -78,7 +76,7 @@ public class PathFinder {
 
     }
 
-    public static void toTrapeze2(){
+    public static void toTrapeze(){
 
         for (int i=0; i<RoomModel.objects.size(); i++) {
             Polygon object = RoomModel.objects.get(i);
@@ -96,6 +94,16 @@ public class PathFinder {
 
         trapezes.add(new Trapeze(cs));
 
+        System.out.println("TRAPEZES");
+        for (Trapeze trapeze: trapezes) {
+            for (int i = 0; i < 4; i++) {
+                System.out.println(trapeze.xpoints[i]+ "-" + trapeze.ypoints[i]);
+            }
+            System.out.println();
+
+        }
+        System.out.println("TRAPEZES");
+
         /*for (Trapeze t: trapezes) {
             for (int i = 0; i < 4 ; i++) {
                 System.out.println(t.xpoints[i]+" "+t.ypoints[i]);
@@ -103,64 +111,6 @@ public class PathFinder {
             System.out.println();
 
         }*/
-    }
-
-
-    public static void toTrapezes(){
-        for (int i=0; i<coordinates.size(); i++) {
-            if (i==0) {
-                Coordinate [] cs={RoomModel.getCorner(0), new Coordinate(coordinates.get(0).getX(),0), new Coordinate(coordinates.get(0).getX(),RoomModel.getHeight()), RoomModel.getCorner(3)};
-                Trapeze t = new Trapeze(cs);
-                t.isEnd=true;
-                trapezes.add(t);
-                System.out.println("elso");
-            } else if (i==coordinates.size()-1){
-                Coordinate [] cs={
-                        new Coordinate(coordinates.get(i-2).getX(),0),
-                        new Coordinate(coordinates.get(i).getX(),0),
-                        new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
-                        new Coordinate(coordinates.get(i-2).getX(),coordinates.get(i-2).getY())
-                };
-                trapezes.add(new Trapeze(cs));
-                System.out.println("utolso");
-            } else if(coordinates.get(i).getY()<coordinates.get(i+1).getY()){
-                Coordinate [] cs={
-                        new Coordinate(coordinates.get(i-1).getX(),0),
-                        new Coordinate(coordinates.get(i).getX(),0),
-                        new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
-                        new Coordinate(coordinates.get(i-1).getX(),coordinates.get(i-1).getY())
-                };
-                trapezes.add(new Trapeze(cs));
-
-                Coordinate [] cs2={
-                        new Coordinate(coordinates.get(i).getX(),0),
-                        new Coordinate(coordinates.get(i+1).getX(),0),
-                        new Coordinate(coordinates.get(i+1).getX(),coordinates.get(i+1).getY()),
-                        new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY())
-                };
-                trapezes.add(new Trapeze(cs2));
-            } else{
-                Coordinate [] cs={
-                        new Coordinate(coordinates.get(i-1).getX(),coordinates.get(i-1).getY()),
-                        new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
-                        new Coordinate(coordinates.get(i).getX(),RoomModel.getHeight()),
-                        new Coordinate(coordinates.get(i-1).getX(),RoomModel.getHeight())
-                };
-                trapezes.add(new Trapeze(cs));
-
-                Coordinate [] cs2={
-                        new Coordinate(coordinates.get(i).getX(),coordinates.get(i).getY()),
-                        new Coordinate(coordinates.get(i+1).getX(),coordinates.get(i+1).getY()),
-                        new Coordinate(coordinates.get(i+1).getX(),RoomModel.getHeight()),
-                        new Coordinate(coordinates.get(i).getX(),RoomModel.getHeight())
-                };
-                trapezes.add(new Trapeze(cs2));
-            }
-        }
-        Coordinate [] cs={new Coordinate(coordinates.get(coordinates.size()-1).getX(),0), RoomModel.getCorner(1), RoomModel.getCorner(2), new Coordinate(coordinates.get(coordinates.size()-1).getX(),RoomModel.getHeight())};
-        Trapeze t = new Trapeze(cs);
-        t.isEnd=true;
-        trapezes.add(t);
     }
 
     /**
@@ -234,7 +184,7 @@ public class PathFinder {
     public static void Calculate() throws Exception {
 
         initCoordinates();
-        toTrapeze2();
+        toTrapeze();
         resetMatrix();
         initMatrix();
 

@@ -45,6 +45,7 @@
       <Pane layoutY="183.0" prefHeight="48.0" prefWidth="432.0">
          <children>
             <Button fx:id="buttonOK" alignment="CENTER" layoutX="200.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleOKAction" text="Ok" />
+            <CheckBox fx:id="IsTurnedOver" layoutX="258.0" layoutY="16.0" mnemonicParsing="false" text="CheckBox" />
          </children>
       </Pane>
       <Pane layoutY="123.0" prefHeight="77.0" prefWidth="441.0" AnchorPane.leftAnchor="0.0">
