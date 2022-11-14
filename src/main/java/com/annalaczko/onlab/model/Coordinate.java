@@ -25,7 +25,7 @@ public class Coordinate {
         Y=y;
     }
 
-    public Polygon getPolygon() {
+    public Polygon getObject() {
         return polygon;
     }
 }

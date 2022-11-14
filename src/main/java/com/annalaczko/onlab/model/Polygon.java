@@ -1,7 +1,6 @@
 package com.annalaczko.onlab.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Polygon extends java.awt.Polygon {
@@ -15,6 +14,11 @@ public class Polygon extends java.awt.Polygon {
         super(x,y,db);
         initCoordinatesAroundTheClock();
         initCoordinatesInOrder();
+    }
+
+    public Position getPosition(Coordinate coordinate){
+        if (coordinate.getY()<this.getFirstCorner().getY() || coordinate.getY()<this.getLastCorner().getY()) return Position.upper;
+        else return Position.lower;
     }
 
 

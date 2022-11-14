@@ -60,13 +60,13 @@ public class RoomModel {
     public static Coordinate getCorner(int id){
         switch (id){
             case 0:
-                return new Coordinate(0,0);
+                return new Coordinate(0,0,null);
             case 1:
-                return new Coordinate(width,0);
+                return new Coordinate(width,0,null);
             case 2:
-                return new Coordinate(width,height);
+                return new Coordinate(width,height,null);
             case 3:
-                return new Coordinate(0,height);
+                return new Coordinate(0,height,null);
             default:
                 return null;
         }
