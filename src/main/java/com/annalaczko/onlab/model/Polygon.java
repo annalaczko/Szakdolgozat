@@ -7,35 +7,46 @@ import java.util.Comparator;
 public class Polygon extends java.awt.Polygon {
 
     public ArrayList<Coordinate> coordinatesInOrder=new ArrayList<>();
+    public ArrayList<Coordinate> coordinatesAroundTheClock=new ArrayList<>();
 
     public Polygon(){}
 
     public Polygon (int [] x, int [] y, int db) {
         super(x,y,db);
+        initCoordinatesAroundTheClock();
         initCoordinatesInOrder();
     }
 
+
     public Coordinate getFirstCorner(){
         Coordinate coor;
-        coor = new Coordinate(super.xpoints[0], super.ypoints[0]);
-        for (int i = 0; i < super.npoints; i++) {
-            if (coor.getX()>super.xpoints[i]) coor=new Coordinate(super.xpoints[i], super.ypoints[i]);
+        coor=coordinatesAroundTheClock.get(0);
+        for (Coordinate coordinate: coordinatesAroundTheClock) {
+            if (coor.getX()>coordinate.getX()) coor=coordinate;
         }
         return coor;
     }
 
     public Coordinate getLastCorner(){
         Coordinate coor;
-        coor = new Coordinate(super.xpoints[0], super.ypoints[0]);
-        for (int i = 0; i < super.npoints; i++) {
-            if (coor.getX()<super.xpoints[i]) coor=new Coordinate(super.xpoints[i], super.ypoints[i]);
+        coor=coordinatesAroundTheClock.get(0);
+        for (Coordinate coordinate: coordinatesAroundTheClock) {
+            if (coor.getX()<coordinate.getX()) coor=coordinate;
         }
         return coor;
     }
 
+    private void initCoordinatesAroundTheClock(){
+        for (int i=0; i<npoints; i++) {
+            coordinatesAroundTheClock.add(new Coordinate(xpoints[i], ypoints[i],this));
+        }
+
+
+    }
+
     private void initCoordinatesInOrder(){
         for (int i=0; i<npoints; i++) {
-            coordinatesInOrder.add(new Coordinate(xpoints[i], ypoints[i]));
+            coordinatesInOrder.add(new Coordinate(xpoints[i], ypoints[i],this));
         }
         coordinatesInOrder.sort(new Comparator<>() {
             @Override

@@ -3,6 +3,7 @@ package com.annalaczko.onlab.view;
 import com.annalaczko.onlab.model.*;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
+import com.annalaczko.onlab.viewmodel.TrapezesViewModel;
 import javafx.geometry.Insets;
 import javafx.scene.PointLight;
 import javafx.scene.layout.*;
@@ -21,6 +22,7 @@ public class SceneView {
 
     public static Pane pane=new Pane();
     public static ArrayList<Polygon> objects=new ArrayList<>();
+    public static ArrayList<Polygon> trapezes=new ArrayList<>();
 
     public static boolean turned;
     public static int iteration = 0;
@@ -33,8 +35,9 @@ public class SceneView {
     }
 
     public static void update(){
-        iteration++;
-        robot.setCenterX(RobotViewModel.location.getY());
+        //ITT BASZTAM EL :(
+
+        robot.setCenterX(RoomViewModel.height-RobotViewModel.location.getY());
         robot.setCenterY(RobotViewModel.location.getX());
     }
 
@@ -90,7 +93,26 @@ public class SceneView {
         pane.getChildren().addAll(objects);
     }
 
+    public static void initTrapezes(){
+    Polygon polygon;
+        for (java.awt.Polygon object: TrapezesViewModel.getObjects()) {
+            double [] points= new double[object.npoints*2];
+            for (int i=0; i<object.npoints; i++){
+                points[2*i]= object.xpoints[i];
+                points[2*i+1]= object.ypoints[i];
+            }
+            polygon =new Polygon(points);
+            polygon.setFill(Color.YELLOW);
+            polygon.setStroke(Color.DARKGRAY);
+            polygon.setVisible(true);
+            trapezes.add(polygon);
+            System.out.println("Benn vagyok");
+        }
+        pane.getChildren().addAll(trapezes);
+    }
+
     public static void moveRobot() {
+
         Thread thread= new Trapezoidal();
         thread.start();
 

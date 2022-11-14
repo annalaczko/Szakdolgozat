@@ -26,6 +26,10 @@ public class RobotModel {
         location.setLocation(x,y);
     }
 
+    public static void setCorner(int corner) {
+        RobotModel.corner = corner;
+    }
+
     public static int getRadius() {
         return radius;
     }

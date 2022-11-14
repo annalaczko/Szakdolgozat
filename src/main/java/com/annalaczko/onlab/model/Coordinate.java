@@ -4,9 +4,12 @@ public class Coordinate {
     private double Y;
     private double X;
 
-    public Coordinate (double x, double y){
+    private Polygon polygon;
+
+    public Coordinate (double x, double y, Polygon polygon1){
         X=x;
         Y=y;
+        polygon=polygon1;
     }
 
     public double getX() {
@@ -22,4 +25,7 @@ public class Coordinate {
         Y=y;
     }
 
+    public Polygon getPolygon() {
+        return polygon;
+    }
 }

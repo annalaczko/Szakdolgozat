@@ -1,8 +1,10 @@
 package com.annalaczko.onlab.view;
 
+import com.annalaczko.onlab.model.PathFinder;
 import com.annalaczko.onlab.model.RoomModel;
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
 import com.annalaczko.onlab.view.SceneView;
+import com.annalaczko.onlab.viewmodel.TrapezesViewModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,6 +74,13 @@ public class MainView implements Initializable
 
     @FXML
     public void handleStartAction() throws Exception {
+
+
+        PathFinder.init();
+        TrapezesViewModel.initialize();
+        SceneView.initTrapezes();
+
+        borderPane.setCenter(SceneView.pane);
 
         thread= new WindowUpdate();
 

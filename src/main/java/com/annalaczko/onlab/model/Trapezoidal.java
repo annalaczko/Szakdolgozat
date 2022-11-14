@@ -2,8 +2,6 @@ package com.annalaczko.onlab.model;
 
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 
-import java.nio.file.Path;
-
 public class Trapezoidal extends Thread{
 
     ZigZag zigZag;
@@ -16,7 +14,7 @@ public class Trapezoidal extends Thread{
     @Override
     public void run() {
         try {
-            PathFinder.Calculate();
+            PathFinder.Calculate(); //TODO:  kezdő trapéz!!!
         } catch (Exception e) {
             e.printStackTrace();
         }

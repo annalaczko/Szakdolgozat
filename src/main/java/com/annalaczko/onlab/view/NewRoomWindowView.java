@@ -62,11 +62,15 @@ public class NewRoomWindowView implements Initializable
 
         RobotViewModel.initialize();
         RoomViewModel.initialize();
-
+        if (IsTurnedOver.isSelected()) {
+            System.out.println("SELECTEED");
+            RobotModel.setCorner(1);
+            OrientationConverter.convert();
+        }
         //RoomModel.sortObjects();
         System.out.println("Number OF CORNERS:" + RoomModel.objects.get(0).npoints);
 
-        if (IsTurnedOver.isSelected()) OrientationConverter.convert();
+
 
 
     }

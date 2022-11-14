@@ -26,8 +26,8 @@ public class OrientationConverter {
             newX = new int[original.npoints];
             newY = new int[original.npoints];
             for (int i = 0; i < original.npoints; i++) {
-                newX[i]=original.ypoints[i];
-                newY[i]=(int)RoomModel.getHeight()-original.xpoints[i];
+                newX[i]=original.ypoints[i]; //(int)RoomModel.getHeight()-
+                newY[i]=(int)RoomModel.getWidth()-original.xpoints[i];//; //
                 System.out.print(newX[i] + "-" + newY[i] + " ");
             }
             System.out.print(" || ");
@@ -75,10 +75,6 @@ public class OrientationConverter {
             }
             System.out.print(" || ");
         }
-    }
-
-    private static void rearrangeList (int [] x, int [] y){
-
     }
 
 }
