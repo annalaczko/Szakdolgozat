@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.model;
+package com.annalaczko.onlab.model.data;
 
 public class Coordinate {
     private double Y;

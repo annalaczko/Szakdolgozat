@@ -1,5 +1,7 @@
 package com.annalaczko.onlab.model;
 
+import com.annalaczko.onlab.model.data.RobotModel;
+import com.annalaczko.onlab.model.data.Trapeze;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 
 public class ZigZag {

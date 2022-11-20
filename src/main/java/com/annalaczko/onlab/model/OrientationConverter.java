@@ -1,6 +1,7 @@
 package com.annalaczko.onlab.model;
 
-import com.annalaczko.onlab.viewmodel.RoomViewModel;
+import com.annalaczko.onlab.model.data.Polygon;
+import com.annalaczko.onlab.model.data.RoomModel;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class OrientationConverter {
         System.out.println();
 
         for (Polygon polygon: newList) {
-            int id = polygon.findCornerId(polygon.coordinatesInOrder.get(0));
+            int id = polygon.findCornerId(polygon.coordinatesOrderByX.get(0));
             int [] tempXCoors=new int[id];
             int [] tempYCoors=new int[id];
             for (int i = 0; i < id; i++) {
@@ -77,4 +78,5 @@ public class OrientationConverter {
         }
     }
 
+    //TODO itt kéne konvertálni a robot mozgását is
 }

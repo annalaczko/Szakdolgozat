@@ -1,6 +1,7 @@
 package com.annalaczko.onlab.viewmodel;
 
 import com.annalaczko.onlab.model.PathFinder;
+import com.annalaczko.onlab.model.TrapezeGenerator;
 import com.annalaczko.onlab.view.SceneView;
 
 import java.awt.*;
@@ -27,7 +28,7 @@ public class TrapezesViewModel {
         int[] xpoints;
         int[] ypoints;
         int npoints;
-        for (Polygon object : PathFinder.trapezes) {
+        for (Polygon object : TrapezeGenerator.trapezes) {
 
             npoints = object.npoints;
             xpoints = new int[npoints];

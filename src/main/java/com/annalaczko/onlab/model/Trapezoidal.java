@@ -1,5 +1,8 @@
 package com.annalaczko.onlab.model;
 
+import com.annalaczko.onlab.model.data.Coordinate;
+import com.annalaczko.onlab.model.data.RobotModel;
+import com.annalaczko.onlab.model.data.Trapeze;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 
 public class Trapezoidal extends Thread{
@@ -21,19 +24,19 @@ public class Trapezoidal extends Thread{
 
         Trapeze lasttetragon=null;
 
-        for (int i=0; i<PathFinder.finaltrapezes.size();i++) {
+        for (int i=0; i<TrapezeGenerator.finaltrapezes.size();i++) {
             if (lasttetragon!=null)
             {
-                id=reallocate(PathFinder.finaltrapezes.get(i), lasttetragon); //következő trapézhoz megy
+                id=reallocate(TrapezeGenerator.finaltrapezes.get(i), lasttetragon); //következő trapézhoz megy
             }
 
             if (!PathFinder.havebeenhere[i]) {
-                zigZag =new ZigZag(PathFinder.finaltrapezes.get(i), id);
+                zigZag =new ZigZag(TrapezeGenerator.finaltrapezes.get(i), id);
                 zigZag.start();
             }
             //System.out.println(id);
 
-            lasttetragon= PathFinder.finaltrapezes.get(i);
+            lasttetragon= TrapezeGenerator.finaltrapezes.get(i);
         }
 
     }
@@ -56,7 +59,7 @@ public class Trapezoidal extends Thread{
             xforRobot=newTrapeze.getCornerForRobot(id).getX()+RobotModel.getRadius()*2;
         }
 
-        dist=distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY()));
+        dist=distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY(), null));
 
         double degree=Math.toDegrees( Math.atan2 ((newTrapeze.getCornerForRobot(id).getY()-RobotModel.getLocation().getY()), (xforRobot-RobotModel.getLocation().getX())));
 

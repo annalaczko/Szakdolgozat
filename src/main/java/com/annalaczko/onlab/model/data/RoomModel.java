@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.model;
+package com.annalaczko.onlab.model.data;
 
 import java.util.ArrayList;
 import java.util.Collections;

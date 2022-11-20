@@ -1,6 +1,6 @@
 package com.annalaczko.onlab.viewmodel;
 
-import com.annalaczko.onlab.model.*;
+import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.view.SceneView;
 import java.awt.Polygon;
 

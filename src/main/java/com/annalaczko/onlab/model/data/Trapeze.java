@@ -1,6 +1,4 @@
-package com.annalaczko.onlab.model;
-
-import java.awt.*;
+package com.annalaczko.onlab.model.data;
 
 public class Trapeze extends Polygon {
 
@@ -65,7 +63,7 @@ public class Trapeze extends Polygon {
         //szögfelező
 
 
-        return new Coordinate(x+xpoints[cornerIndex],y+ypoints[cornerIndex]);
+        return new Coordinate(x+xpoints[cornerIndex],y+ypoints[cornerIndex], null);
     }
 
     @Override

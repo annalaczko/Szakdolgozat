@@ -1,9 +1,9 @@
 package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.model.OrientationConverter;
-import com.annalaczko.onlab.model.Polygon;
-import com.annalaczko.onlab.model.RobotModel;
-import com.annalaczko.onlab.model.RoomModel;
+import com.annalaczko.onlab.model.data.Polygon;
+import com.annalaczko.onlab.model.data.RobotModel;
+import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;

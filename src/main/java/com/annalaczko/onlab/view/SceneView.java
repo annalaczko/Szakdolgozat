@@ -1,11 +1,11 @@
 package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.model.*;
+import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
 import com.annalaczko.onlab.viewmodel.TrapezesViewModel;
 import javafx.geometry.Insets;
-import javafx.scene.PointLight;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -13,7 +13,6 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class SceneView {

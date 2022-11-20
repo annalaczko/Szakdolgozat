@@ -1,9 +1,7 @@
 package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.model.PathFinder;
-import com.annalaczko.onlab.model.RoomModel;
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
-import com.annalaczko.onlab.view.SceneView;
 import com.annalaczko.onlab.viewmodel.TrapezesViewModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

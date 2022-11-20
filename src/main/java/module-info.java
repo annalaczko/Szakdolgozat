@@ -12,4 +12,6 @@ module com.example.demo {
     opens com.annalaczko.onlab.view to javafx.fxml;
     exports com.annalaczko.onlab;
     opens com.annalaczko.onlab to javafx.fxml;
+    exports com.annalaczko.onlab.model.data;
+    opens com.annalaczko.onlab.model.data to javafx.fxml;
 }

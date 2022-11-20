@@ -1,4 +1,4 @@
-package com.annalaczko.onlab.model;
+package com.annalaczko.onlab.model.data;
 
 /**
  * Robot backendje
@@ -6,7 +6,7 @@ package com.annalaczko.onlab.model;
 
 public class RobotModel {
     private static int radius=20; //centimeters
-    private static Coordinate location=new Coordinate(radius, radius);
+    private static Coordinate location=new Coordinate(radius, radius, null);
     private static int corner=0;
     public static double speed=1.5; //centimeters per 10 milliseconds
 
@@ -46,16 +46,16 @@ public class RobotModel {
 
         switch (corner){
             case 0:
-                location=new Coordinate(radius, radius);
+                location=new Coordinate(radius, radius, null);
                 break;
             case 1:
-                location=new Coordinate(RoomModel.getWidth()-radius, radius);
+                location=new Coordinate(RoomModel.getWidth()-radius, radius, null);
                 break;
             case 2:
-                location=new Coordinate(RoomModel.getWidth()-radius, RoomModel.getHeight()-radius);
+                location=new Coordinate(RoomModel.getWidth()-radius, RoomModel.getHeight()-radius, null);
                 break;
             case 3:
-                location=new Coordinate(radius, RoomModel.getHeight()-radius);
+                location=new Coordinate(radius, RoomModel.getHeight()-radius, null);
                 break;
             default:
                 System.out.println("Wrong corner in Robot!");

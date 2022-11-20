@@ -1,8 +1,13 @@
 package com.annalaczko.onlab.model;
 
+import com.annalaczko.onlab.model.data.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.WeakHashMap;
+
+import static com.annalaczko.onlab.model.TrapezeGenerator.initCoordinates;
 
 /**
  *
@@ -10,213 +15,25 @@ import java.util.Comparator;
 public class PathFinder {
 
     public static boolean[][] neighbourMatrix; //trapézok szomszédsági mátrixa
-    public static ArrayList<Trapeze> trapezes=new ArrayList<>(); //trapézok listája
-    private static ArrayList<Coordinate> coordinates=new ArrayList<>();
-    private static ArrayList<Polygon> openObjects=new ArrayList<>();
-    public static ArrayList<Trapeze> finaltrapezes=new ArrayList<>(); //trapézok listája sorrendben ahogyan majd végig megy a robot.
+
     static boolean [] alltrue;
     public static boolean [] havebeenhere;
+    public static ArrayList<Trapeze> finaltrapezes=new ArrayList<>(); //trapézok listája sorrendben ahogyan majd végig megy a robot.
+
 
     /**
      * reseteli a szomszédsági mátrixot
      */
     private static void resetMatrix(){
-        neighbourMatrix= new boolean[trapezes.size()][trapezes.size()];
-        for (int i=0; i< trapezes.size(); i++){
-            for (int j=0; j< trapezes.size(); j++){
+        neighbourMatrix= new boolean[TrapezeGenerator.trapezes.size()][TrapezeGenerator.trapezes.size()];
+        for (int i=0; i< TrapezeGenerator.trapezes.size(); i++){
+            for (int j=0; j< TrapezeGenerator.trapezes.size(); j++){
                 neighbourMatrix[i][j]=false;
             }
         }
     }
+    
 
-    //region Private methods for generating trapezes
-    private static int addFirstTrapeze (Coordinate coordinate, Coordinate [] cs){
-        int i=0;
-        openObjects.add(coordinate.getObject());
-
-        //hozzaadni teglalapot
-        cs =new Coordinate[] {
-                RoomModel.getCorner(0),
-                new Coordinate(coordinate.getX(), 0, null),
-                new Coordinate(coordinate.getX(), RoomModel.getHeight(),null),
-                RoomModel.getCorner(3)
-        };
-        finaltrapezes.add(new Trapeze(cs));
-
-        //nyilik masik objektum is epp?
-        //hozzaadni ha igen
-        while (coordinates.get(i).getX()==coordinate.getX()){
-            i++;
-            if (coordinates.get(i).getObject()!=coordinate.getObject()){
-                openObjects.add(coordinates.get(i).getObject());
-            }
-        }
-        i--;
-        return i;
-    }
-
-    private static void multipleObjectState(Coordinate coordinate, Coordinate [] cs){
-        if (true) //ha bármelyik másik nyitott objektum ugyanazon az oldalon van, mint a coordinate
-        {
-            // megtalálni a legközelebbit "fentről vagy lentről" koordinátától függően
-            if (true) // van itt koordináta?
-            {
-                //a talált koordináta is "használt" lesz
-
-                if (true)//koordináta lezárja az objektumot
-                {
-                    //lezárni objektumot
-                }
-            }
-            else {
-                //kiszámolni a koordinátát
-                //megtalálni melyik két pont között van
-                //mi lesz a bal szomszédja
-                //talált objektumot felülírni egy olyannal ahova jó helyre be van illeszte a koordináta
-                //talált koordináta használt lesz
-            }
-        } else
-        {
-            //ugyanaz az eset, mint     ha nem lenne nyitott objektum
-        }
-    }
-
-    private static void singleObjectState(Coordinate coordinate, Coordinate [] cs){
-
-        Polygon object=coordinate.getObject();
-        int indexOfCoordinate =object.coordinatesAroundTheClock.indexOf(coordinate);
-
-        if (object.getPosition(coordinate)==Position.upper)//ha i. koordináta feljebb van, mint első és utolsó
-        {
-            //akkor i-1 objektumi koordinátával és a szoba tetejével trapéz
-            cs =new Coordinate[] {
-                    new Coordinate(object.coordinatesAroundTheClock.get(indexOfCoordinate-1).getX(), 0,null),
-                    new Coordinate(coordinate.getX(), 0,null),
-                    new Coordinate(coordinate.getX(), coordinate.getY(),null),
-                    new Coordinate( object.coordinatesAroundTheClock.get(indexOfCoordinate-1).getX(),
-                                    object.coordinatesAroundTheClock.get(indexOfCoordinate-1).getY(),null)
-            };
-        }
-
-        else
-        {
-            //akkor i+1 (vagy 0) objektumi koordinátával és a szoba tetejével trapéz
-        }
-
-        if (true) // nem nyílik-e épp egy objektum
-        {
-            //hozzáadni nyitott objektumokhoz
-            // koordináta használt
-        }
-
-
-    }
-
-    private static int findTrapezeUltimate(int i){
-
-        Coordinate coordinate = coordinates.get(i);
-        Coordinate [] cs= new Coordinate[4];
-
-        if (i==0){
-            i=addFirstTrapeze(coordinate,cs);
-        } else {
-            if (openObjects.size()>=1)// van másik nyitott objektum
-            {
-                multipleObjectState(coordinate,cs);
-            }
-            else {
-                singleObjectState(coordinate,cs);
-            }
-        }
-
-        if (coordinates.get(i).getObject().getLastCorner()==coordinates.get(i)) // ha az objektum utolsó koordinátája
-        {
-            openObjects.remove(coordinates.get(i).getObject());
-        }
-        //i Coordináta "elhasznalva"  -> mivel iterálgatunk, az megoldja
-        return i;
-    }
-
-    //endregion
-
-    public static  void findTrapeze(int i, int j, Polygon object){
-        double x = object.coordinatesInOrder.get(j).getX();
-        double y = object.coordinatesInOrder.get(j).getY();
-        Coordinate [] cs=new Coordinate[4];
-        if (j == 0) {
-            if (i == 0) {
-                cs =new Coordinate[] {
-                        RoomModel.getCorner(0),
-                        new Coordinate(x, 0, null),
-                        new Coordinate(x, RoomModel.getHeight(),null),
-                        RoomModel.getCorner(3)
-                };
-            } else {
-                cs = new Coordinate[]{
-                        new Coordinate(RoomModel.objects.get(i - 1).getLastCorner().getX(), 0,null),
-                        new Coordinate(x, 0,null),
-                        new Coordinate(x, RoomModel.getHeight(),null),
-                        new Coordinate(RoomModel.objects.get(i - 1).getLastCorner().getX(), RoomModel.getHeight(),null)
-                };
-            }
-        } else {
-            int id=object.findCornerId(new Coordinate(x,y,null));
-            if (y<object.getFirstCorner().getY()||j==object.npoints-1){
-                cs =new Coordinate[] {
-                        new Coordinate(object.xpoints[id-1], 0,null),
-                        new Coordinate(x, 0,null),
-                        new Coordinate(x, y,null),
-                        new Coordinate(object.xpoints[id-1], object.ypoints[id-1],null)
-                };
-                if (j==object.npoints-1) trapezes.add(new Trapeze(cs));
-            }
-            if (y>=object.getFirstCorner().getY()||j==object.npoints-1){
-                if (id==object.npoints-1) { //||j==object.npoints-1
-                    id=-1;
-                }
-                cs = new Coordinate[]{
-                        new Coordinate(object.xpoints[id + 1], object.ypoints[id + 1],null),
-                        new Coordinate(x, y,null),
-                        new Coordinate(x, RoomModel.getHeight(),null),
-                        new Coordinate(object.xpoints[id + 1],RoomModel.getHeight(),null )
-                };
-            }
-
-        }
-        trapezes.add(new Trapeze(cs));
-
-    }
-
-    //region Public methods
-    public static void toTrapeze(){
-
-        for (int i=0; i<RoomModel.objects.size(); i++) {
-            Polygon object = RoomModel.objects.get(i);
-            for (int j = 0; j < object.npoints; j++) {
-                findTrapeze(i,j,object);
-            }
-        }
-
-        Coordinate [] cs ={
-                new Coordinate(RoomModel.objects.get(RoomModel.objects.size()-1).getLastCorner().getX(), 0,null),
-                RoomModel.getCorner(1),
-                RoomModel.getCorner(2),
-                new Coordinate(RoomModel.objects.get(RoomModel.objects.size()-1).getLastCorner().getX(), RoomModel.getHeight(),null)
-        };
-
-        trapezes.add(new Trapeze(cs));
-
-        System.out.println("TRAPEZES");
-        for (Trapeze trapeze: trapezes) {
-            for (int i = 0; i < 4; i++) {
-                System.out.println(trapeze.xpoints[i]+ "-" + trapeze.ypoints[i]);
-            }
-            System.out.println();
-
-        }
-        System.out.println("TRAPEZES");
-
-    }
 
     public static void Calculate() throws Exception {
 
@@ -230,7 +47,7 @@ public class PathFinder {
 
     public static void init (){
         initCoordinates();
-        toTrapeze();
+        TrapezeGenerator.toTrapeze();
     }
     //endregion
 
@@ -315,7 +132,7 @@ Coordinate same= new Coordinate(-40,-40);
         initAlltrue();
         initHavebeenhere();
 
-        finaltrapezes.add(trapezes.get(id));
+        TrapezeGenerator.finaltrapezes.add(TrapezeGenerator.trapezes.get(id));
         alltrue[id]=true;
         while (!allTrue(alltrue)){
             hasNewNeighbour=false;
@@ -325,25 +142,25 @@ Coordinate same= new Coordinate(-40,-40);
              * Lépjünk vissza egyet
              */
 
-            for (int i = 0; i < trapezes.size(); i++) {
+            for (int i = 0; i < TrapezeGenerator.trapezes.size(); i++) {
                 if (neighbourMatrix[id][i] && !alltrue[i]){
                     hasNewNeighbour=true;
                 }
             }
 
             if (!hasNewNeighbour){
-                finaltrapezes.add(trapezes.get(id)); //Vízszintesben itt beleszaladunk valami nagy gebaszba és itt ragadunk :(
-                System.out.println(finaltrapezes.size());
+                TrapezeGenerator.finaltrapezes.add(TrapezeGenerator.trapezes.get(id)); //Vízszintesben itt beleszaladunk valami nagy gebaszba és itt ragadunk :(
+                System.out.println(TrapezeGenerator.finaltrapezes.size());
                 havebeenhere[id]=true;
                 id=lastID;
                 continue;
             }
 
-            for (int i = 0; i < trapezes.size(); i++) {
+            for (int i = 0; i < TrapezeGenerator.trapezes.size(); i++) {
                 if (neighbourMatrix[id][i] && !alltrue[i]){ //ha nem ugyanaz a trapéz kerül sorra, de szomszédosak és még nem jártunk a trapézban
                     lastID=id;
                     id=i;
-                    finaltrapezes.add(trapezes.get(id));
+                    TrapezeGenerator.finaltrapezes.add(TrapezeGenerator.trapezes.get(id));
                     alltrue[id]=true;
                     break;
                 }
@@ -353,14 +170,14 @@ Coordinate same= new Coordinate(-40,-40);
     }
 
     private static void initAlltrue(){
-        alltrue=new boolean[trapezes.size()];
+        alltrue=new boolean[TrapezeGenerator.trapezes.size()];
         for (int i = 0; i < alltrue.length; i++) {
             alltrue[i]=false;
         }
     }
 
     private static void initHavebeenhere(){
-        havebeenhere=new boolean[trapezes.size()];
+        havebeenhere=new boolean[TrapezeGenerator.trapezes.size()];
         for (int i = 0; i < havebeenhere.length; i++) {
             havebeenhere[i]=false;
         }
@@ -372,7 +189,7 @@ Coordinate same= new Coordinate(-40,-40);
      * @return
      */
     public static boolean allTrue(boolean [] trap){
-        for (int i = 0; i < trapezes.size(); i++) {
+        for (int i = 0; i < TrapezeGenerator.trapezes.size(); i++) {
             if (!trap[i]){
                 return false;
             }
@@ -380,21 +197,5 @@ Coordinate same= new Coordinate(-40,-40);
         return true;
     }
 
-    /**
-     * az összes objektum koordinátáit felveszi majd x kooridináta alapján sorrendezi
-     */
-    public static void initCoordinates(){
-        for ( Polygon object: RoomModel.objects) {
-            for (Coordinate coordinate: object.coordinatesAroundTheClock){
-                coordinates.add(coordinate);
-            }
-        }
-        Collections.sort(coordinates, new Comparator<Coordinate>() {
-            @Override
-            public int compare(Coordinate o1, Coordinate o2) {
-                return Double.compare(o1.getX(), o2.getX());
-            }
-        });
 
-    }
 }
