@@ -1,7 +1,6 @@
 package com.annalaczko.onlab.view;
 
 import com.annalaczko.onlab.model.OrientationConverter;
-import com.annalaczko.onlab.model.data.Polygon;
 import com.annalaczko.onlab.model.data.RobotModel;
 import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
@@ -15,8 +14,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NewRoomWindowView implements Initializable
-{
+public class NewRoomWindowView implements Initializable {
     @FXML
     private TextField x1;
     @FXML
@@ -40,25 +38,27 @@ public class NewRoomWindowView implements Initializable
     private TextField roomHeight;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
-    @FXML
-    private void handleOKAction(){
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
-        int width=Integer.parseInt(roomWidth.getText());
-        int height=Integer.parseInt(roomHeight.getText());
-        if (height!=0 && width!=0) {
-            if  (height< RobotModel.getRadius()*2) height= RobotModel.getRadius()*2;
-            if  (width< RobotModel.getRadius()*2) width= RobotModel.getRadius()*2;
+    @FXML
+    private void handleOKAction() {
+
+        int width = Integer.parseInt(roomWidth.getText());
+        int height = Integer.parseInt(roomHeight.getText());
+        if (height != 0 && width != 0) {
+            if (height < RobotModel.getRadius() * 2) height = RobotModel.getRadius() * 2;
+            if (width < RobotModel.getRadius() * 2) width = RobotModel.getRadius() * 2;
             NewRoomViewModel.getStage().close();
             RoomModel.setCorners(width, height);
             RoomModel.addObject();
 
         }
 
-        int  [] xpoints={Integer.parseInt(x1.getText()), Integer.parseInt(x2.getText()), Integer.parseInt(x3.getText())} ;
-        int  [] ypoints={Integer.parseInt(y1.getText()), Integer.parseInt(y2.getText()), Integer.parseInt(y3.getText())};
+        //int[] xpoints = {Integer.parseInt(x1.getText()), Integer.parseInt(x2.getText()), Integer.parseInt(x3.getText())};
+        //int[] ypoints = {Integer.parseInt(y1.getText()), Integer.parseInt(y2.getText()), Integer.parseInt(y3.getText())};
 
-        RoomModel.objects.add(new Polygon(xpoints,ypoints,3));
+        //RoomModel.objects.add(new Polygon(xpoints,ypoints,3));
 
         RobotViewModel.initialize();
         RoomViewModel.initialize();
@@ -69,8 +69,6 @@ public class NewRoomWindowView implements Initializable
         }
         //RoomModel.sortObjects();
         System.out.println("Number OF CORNERS:" + RoomModel.objects.get(0).npoints);
-
-
 
 
     }

@@ -1,6 +1,5 @@
 package com.annalaczko.onlab.view;
 
-import com.annalaczko.onlab.model.PathFinder;
 import com.annalaczko.onlab.viewmodel.NewRoomViewModel;
 import com.annalaczko.onlab.viewmodel.TrapezesViewModel;
 import javafx.application.Platform;
@@ -8,33 +7,67 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
 
 import java.util.ResourceBundle;
 
-public class MainView implements Initializable
-{
+public class MainView implements Initializable {
+    public static boolean isRunning = true;
     @FXML
     private MenuBar menuBar;
-
     @FXML
     private BorderPane borderPane;
-
-    public static boolean isRunning=true;
+    private WindowUpdate thread;
 
     @FXML
-    private void handleExitAction(final ActionEvent event)
-    {
+    private void handleExitAction(final ActionEvent event) {
         thread.stop();
         Platform.exit();
     }
 
-    private WindowUpdate thread;
+    @Override
+    public void initialize(java.net.URL arg0, ResourceBundle arg1) {
+        menuBar.setFocusTraversable(true);
+    }
 
-    private class WindowUpdate extends Thread{
-        public void run (){
+    @FXML
+    private void handleNewRoomAction(final ActionEvent event) throws Exception {
+        NewRoomViewModel.start();
+    }
 
-            while (isRunning){
+    @FXML
+    public void handleLoadAction() {
+        SceneView.initialize();
+        borderPane.setCenter(SceneView.pane);
+    }
+
+    public void update() {
+        SceneView.update();
+    }
+
+    @FXML
+    public void handleHelpAction() {
+    }
+
+    @FXML
+    public void handleStartAction() throws Exception {
+
+        TrapezesViewModel.initialize();
+        SceneView.initTrapezes();
+
+        borderPane.setCenter(SceneView.pane);
+
+        thread = new WindowUpdate();
+
+        thread.start();
+
+        SceneView.moveRobot();
+    }
+
+    private class WindowUpdate extends Thread {
+        public void run() {
+
+            while (isRunning) {
                 update();
                 try {
                     sleep(10);
@@ -44,46 +77,5 @@ public class MainView implements Initializable
             }
 
         }
-    }
-
-    @Override
-    public void initialize(java.net.URL arg0, ResourceBundle arg1) {
-        menuBar.setFocusTraversable(true);
-    }
-
-    @FXML
-    private void handleNewRoomAction (final ActionEvent event) throws Exception {
-        NewRoomViewModel.start();
-    }
-
-    @FXML
-    public void handleLoadAction(){
-        SceneView.initialize();
-        borderPane.setCenter(SceneView.pane);
-    }
-
-    public void update(){
-        SceneView.update();
-    }
-
-    @FXML
-    public void handleHelpAction(){
-   }
-
-    @FXML
-    public void handleStartAction() throws Exception {
-
-
-        PathFinder.init();
-        TrapezesViewModel.initialize();
-        SceneView.initTrapezes();
-
-        borderPane.setCenter(SceneView.pane);
-
-        thread= new WindowUpdate();
-
-        thread.start();
-
-        SceneView.moveRobot();
     }
 }
