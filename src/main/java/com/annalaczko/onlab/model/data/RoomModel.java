@@ -32,18 +32,27 @@ public class RoomModel {
     public static void addObject(/*Polygon newObject*/) {
         // objects.add(newObject);
 
-        int[] xpoints = {100, 300, 700, 500};
-        int[] ypoints = {300, 100, 300, 500};
+        int[] xpoints = {100, 200, 600, 400};
+        int[] ypoints = {400, 200, 100, 500};
 
-        //[] xpoints2 = {900, 1200, 1200, 900};
-        //int[] ypoints2 = {200, 200, 400, 400};
+        int[] xpoints1 = {100, 300, 700, 500};
+        int[] ypoints1 = {300, 100, 300, 500};
+
+        int[] xpoints2 = {900, 1200, 1200, 900};
+        int[] ypoints2 = {200, 200, 400, 400};
 
         int[] xpoints3 = {400, 1000, 500};
         int[] ypoints3 = {600, 900, 800};
 
+        int[] xpoints4 = {1300, 1500, 1800, 1900, 1300};
+        int[] ypoints4 = {600, 400, 400, 700, 900};
+
         objects.add(new Polygon(xpoints, ypoints, 4));
+        //objects.add(new Polygon(xpoints1, ypoints1, 4));
         //objects.add(new Polygon(xpoints2, ypoints2, 4));
-        objects.add(new Polygon(xpoints3, ypoints3, 3));
+        //objects.add(new Polygon(xpoints3, ypoints3, 3));
+        //objects.add(new Polygon(xpoints4, ypoints4, 5));
+
     }
 
     public static double getWidth() {

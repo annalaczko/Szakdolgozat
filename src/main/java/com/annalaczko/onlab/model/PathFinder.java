@@ -31,14 +31,10 @@ public class PathFinder {
     public static void Calculate() throws Exception {
 
         TrapezeGenerator.startGenerating();
-        System.out.println("generating over");
-        TrapezeGenerator.writeTrapezes();
-        /*initCoordinates();
-        toTrapeze();*/
-        resetMatrix(); //TODO le van állítva a program
-        //initMatrix();
+        resetMatrix();
+        initMatrix();
 
-        //hamilton();
+        hamilton();
     }
     //endregion
 
