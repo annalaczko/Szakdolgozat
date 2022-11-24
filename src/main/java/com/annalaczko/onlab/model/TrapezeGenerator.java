@@ -190,39 +190,26 @@ public class TrapezeGenerator {
                             if (c2.getObject().findNeighbourCoordinate(c1).getX() > c0.getX()) {
                                 c3 = c2.getObject().findNeighbourCoordinate(c1);
                                 if (findLastUsedGoodCoordinate(c1, c3, Position.lower) != null) {
-                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.upper), Position.upper);
-                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.upper), Position.lower);
+                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.lower), Position.upper);
+                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.lower), Position.lower);
                                 } else {
                                     c0 = findCoordinate(c3, Position.upper);
                                 }
                             } else {
                                 if (findLastUsedGoodCoordinate(c1, c0, Position.lower) != null) {
-                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.upper), Position.upper);
-                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.upper), Position.lower);
+                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.upper);
+                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.lower);
                                 } else {
                                     c3 = findCoordinate(c0, Position.lower);
                                 }
                             }
                         } else {
                             if (findLastUsedGoodCoordinate(c1, c0, Position.lower) != null) {
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.upper), Position.upper);
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.upper), Position.lower);
+                                c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.upper);
+                                c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.lower);
                             } else {
-                                c0 = findCoordinate(c3, Position.upper);
+                                c3 = findCoordinate(c0, Position.lower);
                             }
-                        }
-
-                        if (c1.getObject().findCornerIdAroundTheClock(c1) != 0)
-                            if (c1.getObject().findCornerIdAroundTheClock(c1) == c1.getObject().npoints - 1) {
-                                c0 = c1.getObject().coordinatesAroundTheClock.get(0);
-                            } else {
-                                c0 = c1.getObject().coordinatesAroundTheClock.get(c1.getObject().findCornerIdAroundTheClock(c1) + 1);
-                            }
-                        if (c2.getObject() != null && c2.getObject().findNeighbourCoordinate(coordinate).getX() > c0.getX()) {
-                            c0 = findCoordinate(c2.getObject().findNeighbourCoordinate(coordinate), Position.upper);
-                            c3 = c2.getObject().findNeighbourCoordinate(coordinate);
-                        } else {
-                            c3 = findCoordinate(c0, Position.lower);
                         }
                         cs = new Coordinate[]{c0, c1, c2, c3};
                         trapezes.add(new Trapeze(cs));
