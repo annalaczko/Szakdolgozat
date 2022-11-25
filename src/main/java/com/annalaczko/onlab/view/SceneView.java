@@ -1,6 +1,6 @@
 package com.annalaczko.onlab.view;
 
-import com.annalaczko.onlab.model.*;
+import com.annalaczko.onlab.model.Trapezoidal;
 import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 
 public class SceneView {
 
-    public static Circle robot=new Circle();
+    public static Circle robot = new Circle();
 
-    public static Pane pane=new Pane();
-    public static ArrayList<Polygon> objects=new ArrayList<>();
-    public static ArrayList<Polygon> trapezes=new ArrayList<>();
+    public static Pane pane = new Pane();
+    public static ArrayList<Polygon> objects = new ArrayList<>();
+    public static ArrayList<Polygon> trapezes = new ArrayList<>();
 
     public static boolean turned;
     public static int iteration = 0;
@@ -33,14 +33,17 @@ public class SceneView {
         initObjects();
     }
 
-    public static void update(){
+    public static void update() {
         //ITT BASZTAM EL :(
 
-        robot.setCenterX(RoomViewModel.height-RobotViewModel.location.getY());
-        robot.setCenterY(RobotViewModel.location.getX());
+        robot.setCenterX(RobotViewModel.location.getX());
+        robot.setCenterY(RobotViewModel.location.getY());
+
+        //robot.setCenterX(RoomViewModel.height-RobotViewModel.location.getY());
+        //robot.setCenterY(RobotViewModel.location.getX());
     }
 
-    private static void initPane(){
+    private static void initPane() {
 
         pane.setMinHeight(RoomViewModel.height);
         pane.setMinWidth(RoomViewModel.width);
@@ -54,7 +57,7 @@ public class SceneView {
         pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
     }
 
-    private static void initRobot(){
+    private static void initRobot() {
         robot.setVisible(true);
         robot.setRadius(RobotViewModel.radius);
         robot.setCenterX(RobotViewModel.location.getX());
@@ -62,12 +65,12 @@ public class SceneView {
         robot.setFill(Color.LIGHTGRAY);
         robot.setStroke(Color.DARKGRAY);
         robot.setStrokeType(StrokeType.INSIDE);
-        robot.setStrokeWidth(RobotViewModel.radius/3);
+        robot.setStrokeWidth(RobotViewModel.radius / 3);
         pane.getChildren().add(robot);
     }
 
-    private static void addCircle(){
-        Circle way= new Circle();
+    private static void addCircle() {
+        Circle way = new Circle();
         way.setVisible(true);
         way.setRadius(1);
         way.setCenterX(RobotViewModel.location.getX());
@@ -79,28 +82,28 @@ public class SceneView {
         System.out.println("benn");
     }
 
-    private static void initObjects(){
+    private static void initObjects() {
 
-        for (java.awt.Polygon object: RoomViewModel.getObjects()) {
-            double [] points= new double[object.npoints*2];
-            for (int i=0; i<object.npoints; i++){
-                points[2*i]= object.xpoints[i];
-                points[2*i+1]= object.ypoints[i];
+        for (java.awt.Polygon object : RoomViewModel.getObjects()) {
+            double[] points = new double[object.npoints * 2];
+            for (int i = 0; i < object.npoints; i++) {
+                points[2 * i] = object.xpoints[i];
+                points[2 * i + 1] = object.ypoints[i];
             }
             objects.add(new Polygon(points));
         }
         pane.getChildren().addAll(objects);
     }
 
-    public static void initTrapezes(){
-    Polygon polygon;
-        for (java.awt.Polygon object: TrapezesViewModel.getObjects()) {
-            double [] points= new double[object.npoints*2];
-            for (int i=0; i<object.npoints; i++){
-                points[2*i]= object.xpoints[i];
-                points[2*i+1]= object.ypoints[i];
+    public static void initTrapezes() {
+        Polygon polygon;
+        for (java.awt.Polygon object : TrapezesViewModel.getObjects()) {
+            double[] points = new double[object.npoints * 2];
+            for (int i = 0; i < object.npoints; i++) {
+                points[2 * i] = object.xpoints[i];
+                points[2 * i + 1] = object.ypoints[i];
             }
-            polygon =new Polygon(points);
+            polygon = new Polygon(points);
             polygon.setFill(Color.YELLOW);
             polygon.setStroke(Color.DARKGRAY);
             polygon.setVisible(true);
@@ -112,13 +115,13 @@ public class SceneView {
 
     public static void moveRobot() {
 
-        Thread thread= new Trapezoidal();
+        Thread thread = new Trapezoidal();
         thread.start();
 
     }
 
-    public static double calcConstant(){
-        return Math.min(Double.valueOf(1000)/ RoomModel.getWidth(), Double.valueOf(600)/ RoomModel.getHeight());
+    public static double calcConstant() {
+        return Math.min(Double.valueOf(1000) / RoomModel.getWidth(), Double.valueOf(600) / RoomModel.getHeight());
     }
 
 

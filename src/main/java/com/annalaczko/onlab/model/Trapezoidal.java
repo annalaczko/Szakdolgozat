@@ -17,7 +17,7 @@ public class Trapezoidal extends Thread {
     @Override
     public void run() {
         try {
-            PathFinder.Calculate(); //TODO:  kezdő trapéz!!!
+            PathFinder.Calculate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,8 +32,8 @@ public class Trapezoidal extends Thread {
             if (!PathFinder.havebeenhere[i]) {
                 zigZag = new ZigZag(PathFinder.finaltrapezes.get(i), id);
                 zigZag.start();
+                //TODO: lehet itt érzékeli nullánaka threadet?
             }
-            //System.out.println(id);
 
             lasttetragon = PathFinder.finaltrapezes.get(i);
         }
@@ -65,7 +65,7 @@ public class Trapezoidal extends Thread {
         while (dist > 0) {
             RobotModel.move(degree);
             try {
-                Thread.sleep(10);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -79,7 +79,7 @@ public class Trapezoidal extends Thread {
         while (dist > 0) {
             RobotModel.move(degree);
             try {
-                Thread.sleep(10);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
