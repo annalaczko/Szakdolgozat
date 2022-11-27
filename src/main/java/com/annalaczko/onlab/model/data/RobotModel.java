@@ -5,7 +5,7 @@ package com.annalaczko.onlab.model.data;
  */
 
 public class RobotModel {
-    public static double speed = 3; //centimeters per 10 milliseconds
+    public static double speed = 10; //centimeters per 10 milliseconds
     private static int radius = 20; //centimeters
     private static Coordinate location = new Coordinate(radius, radius, null);
     private static int corner = 0;
@@ -57,10 +57,7 @@ public class RobotModel {
                 location = new Coordinate(radius, RoomModel.getHeight() - radius, null);
                 break;
             default:
-                System.out.println("Wrong corner in Robot!");
                 break;
         }
-
-
     }
 }

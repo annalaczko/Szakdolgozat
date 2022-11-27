@@ -7,6 +7,7 @@ import com.annalaczko.onlab.viewmodel.RobotViewModel;
 
 public class Trapezoidal extends Thread {
 
+    public static boolean[] havebeenhere;
     ZigZag zigZag;
     int id;
 
@@ -14,29 +15,47 @@ public class Trapezoidal extends Thread {
     Körbe
      */
 
+    private static void initHavebeenhere() {
+        havebeenhere = new boolean[TrapezeGenerator.trapezes.size()];
+        for (int i = 0; i < havebeenhere.length; i++) {
+            havebeenhere[i] = false;
+        }
+    }
+
     @Override
     public void run() {
+        Timer timer = new Timer();
+
+        timer.start();
+
         try {
             PathFinder.Calculate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        initHavebeenhere();
 
         Trapeze lasttetragon = null;
+
+        timer.writeTime();
 
         for (int i = 0; i < PathFinder.finaltrapezes.size(); i++) {
             if (lasttetragon != null) {
                 id = reallocate(PathFinder.finaltrapezes.get(i), lasttetragon); //következő trapézhoz megy
             }
 
-            if (!PathFinder.havebeenhere[i]) {
+            int havebeenhereID = TrapezeGenerator.trapezes.indexOf(PathFinder.finaltrapezes.get(i));
+
+            if (!havebeenhere[havebeenhereID]) {
+                havebeenhere[havebeenhereID] = true;
                 zigZag = new ZigZag(PathFinder.finaltrapezes.get(i), id);
                 zigZag.start();
-                //TODO: lehet itt érzékeli nullánaka threadet?
             }
 
             lasttetragon = PathFinder.finaltrapezes.get(i);
         }
+        timer.over();
+
 
     }
 

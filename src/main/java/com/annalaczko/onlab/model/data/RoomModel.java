@@ -35,23 +35,23 @@ public class RoomModel {
         int[] xpoints = {100, 200, 600, 400};
         int[] ypoints = {400, 200, 100, 500};
 
-        int[] xpoints1 = {10, 30, 70, 50};
-        int[] ypoints1 = {30, 10, 30, 50};
+        int[] xpoints1 = {100, 300, 700, 500};
+        int[] ypoints1 = {300, 100, 300, 500};
 
-        int[] xpoints2 = {90, 120, 120, 90};
-        int[] ypoints2 = {20, 20, 40, 40};
+        int[] xpoints2 = {900, 1200, 1200, 900};
+        int[] ypoints2 = {200, 200, 400, 400};
 
-        int[] xpoints3 = {40, 100, 50};
-        int[] ypoints3 = {60, 90, 80};
+        int[] xpoints3 = {400, 1000, 500};
+        int[] ypoints3 = {600, 900, 800};
 
-        int[] xpoints4 = {120, 140, 170, 180, 120};
-        int[] ypoints4 = {60, 40, 40, 70, 90};
+        int[] xpoints4 = {1200, 1400, 1700, 1800, 1200};
+        int[] ypoints4 = {600, 400, 400, 700, 900};
 
-        objects.add(new Polygon(xpoints, ypoints, 4));
-        //objects.add(new Polygon(xpoints1, ypoints1, 4));
-        //objects.add(new Polygon(xpoints2, ypoints2, 4));
-        //objects.add(new Polygon(xpoints3, ypoints3, 3));
-        //objects.add(new Polygon(xpoints4, ypoints4, 5));
+        //objects.add(new Polygon(xpoints, ypoints, 4));
+        objects.add(new Polygon(xpoints1, ypoints1, 4));
+        objects.add(new Polygon(xpoints2, ypoints2, 4));
+        objects.add(new Polygon(xpoints3, ypoints3, 3));
+        objects.add(new Polygon(xpoints4, ypoints4, 5));
 
     }
 

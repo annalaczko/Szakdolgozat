@@ -15,18 +15,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NewRoomWindowView implements Initializable {
-    @FXML
-    private TextField x1;
-    @FXML
-    private TextField y1;
-    @FXML
-    private TextField x2;
-    @FXML
-    private TextField y2;
-    @FXML
-    private TextField x3;
-    @FXML
-    private TextField y3;
 
     @FXML
     private CheckBox IsTurnedOver;
@@ -55,21 +43,15 @@ public class NewRoomWindowView implements Initializable {
 
         }
 
-        //int[] xpoints = {Integer.parseInt(x1.getText()), Integer.parseInt(x2.getText()), Integer.parseInt(x3.getText())};
-        //int[] ypoints = {Integer.parseInt(y1.getText()), Integer.parseInt(y2.getText()), Integer.parseInt(y3.getText())};
 
-        //RoomModel.objects.add(new Polygon(xpoints,ypoints,3));
-
-        RobotViewModel.initialize();
         RoomViewModel.initialize();
+        RobotViewModel.initialize();
         if (IsTurnedOver.isSelected()) {
-            System.out.println("SELECTEED");
-            RobotModel.setCorner(1);
-            OrientationConverter.convert();
-        }
-        //RoomModel.sortObjects();
-        System.out.println("Number OF CORNERS:" + RoomModel.objects.get(0).npoints);
+            OrientationConverter.turned = true;
 
+            OrientationConverter.convert();
+            RobotModel.setCorner(0);
+        }
 
     }
 }

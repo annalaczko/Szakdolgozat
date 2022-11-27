@@ -95,7 +95,6 @@ public class ZigZag {
         }
 
         //MainController.isRunning=false;
-        System.out.println("PUFFF");
 
     }
 
@@ -142,7 +141,7 @@ public class ZigZag {
             }
 
             if (corner == 1 || corner == 2) {
-                distanceX = RobotModel.getLocation().getX();
+                distanceX = RobotModel.getLocation().getX() - trapeze.xpoints[0];
             } else {
                 distanceX = trapeze.xpoints[2] - RobotModel.getLocation().getX();
             }

@@ -1,5 +1,6 @@
 package com.annalaczko.onlab.view;
 
+import com.annalaczko.onlab.model.OrientationConverter;
 import com.annalaczko.onlab.model.Trapezoidal;
 import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
@@ -23,10 +24,6 @@ public class SceneView {
     public static ArrayList<Polygon> objects = new ArrayList<>();
     public static ArrayList<Polygon> trapezes = new ArrayList<>();
 
-    public static boolean turned;
-    public static int iteration = 0;
-
-
     public static void initialize() {
         initPane();
         initRobot();
@@ -34,13 +31,16 @@ public class SceneView {
     }
 
     public static void update() {
-        //ITT BASZTAM EL :(
 
         robot.setCenterX(RobotViewModel.location.getX());
         robot.setCenterY(RobotViewModel.location.getY());
 
-        //robot.setCenterX(RoomViewModel.height-RobotViewModel.location.getY());
-        //robot.setCenterY(RobotViewModel.location.getX());
+        if (OrientationConverter.turned) {
+            robot.setCenterX(RoomViewModel.width - RobotViewModel.location.getY());
+            robot.setCenterY(RobotViewModel.location.getX());
+        }
+
+
     }
 
     private static void initPane() {
@@ -62,6 +62,11 @@ public class SceneView {
         robot.setRadius(RobotViewModel.radius);
         robot.setCenterX(RobotViewModel.location.getX());
         robot.setCenterY(RobotViewModel.location.getY());
+
+        if (OrientationConverter.turned) {
+            robot.setCenterX(RoomViewModel.width - RobotViewModel.location.getY());
+            robot.setCenterY(RobotViewModel.location.getX());
+        }
         robot.setFill(Color.LIGHTGRAY);
         robot.setStroke(Color.DARKGRAY);
         robot.setStrokeType(StrokeType.INSIDE);

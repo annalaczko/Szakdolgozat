@@ -57,6 +57,7 @@ public class MainView implements Initializable {
 
         borderPane.setCenter(SceneView.pane);
 
+
         thread = new WindowUpdate();
 
         thread.start();

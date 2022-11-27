@@ -77,7 +77,6 @@ public class Trapeze extends Polygon {
             super.xpoints[i] = (int) xpoints[i];
             super.ypoints[i] = (int) ypoints[i];
         }
-        System.out.println(super.xpoints[0] + "super");
 
         return super.contains(x, y);
     }

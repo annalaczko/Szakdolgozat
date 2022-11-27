@@ -119,38 +119,43 @@ public class Polygon extends java.awt.Polygon {
         return false;
     }
 
-    public Coordinate findNeighbourCoordinate(Coordinate coordinate) throws Exception {
+    public Coordinate findNeighbourCoordinate(Coordinate coordinate, Position position) throws Exception {
         Coordinate neighbourCoordinate = null;
-        switch (getUnknownCoordinatePosition(coordinate)) {
-
+        switch (position) {
             case upper:
                 for (int i = coordinatesOrderByX.size() - 1; i >= 0; i--) {
-                    if (coordinatesOrderByX.get(i).getX() < coordinate.getX() && isCoordinatePosition(coordinatesOrderByX.get(i), Position.upper))
+                    if (coordinatesOrderByX.get(i).getX() < coordinate.getX() && isCoordinatePosition(coordinatesOrderByX.get(i), Position.upper)) {
                         neighbourCoordinate = coordinatesOrderByX.get(i);
+                        break;
+                    }
+
                 }
                 break;
             case lower:
                 for (int i = coordinatesOrderByX.size() - 1; i >= 0; i--) {
-                    if (coordinatesOrderByX.get(i).getX() < coordinate.getX() && isCoordinatePosition(coordinatesOrderByX.get(i), Position.lower))
+                    if (coordinatesOrderByX.get(i).getX() < coordinate.getX() && isCoordinatePosition(coordinatesOrderByX.get(i), Position.lower)) {
                         neighbourCoordinate = coordinatesOrderByX.get(i);
+                        break;
+                    }
                 }
                 break;
             default:
                 break;
         }
 
-        if (neighbourCoordinate == null)
-            throw new Exception("neighbourCoordinate is null in Polygon findNeighbourCoordinate" + getUnknownCoordinatePosition(coordinate).toString());
-
         return neighbourCoordinate;
     }
 
-    public Position getUnknownCoordinatePosition(Coordinate coordinate) {
-        if (this.contains(coordinate.getX(), coordinate.getY() + 2)) {
-            return Position.upper;
-        } else {
-            return Position.lower;
+    public boolean isUnknownCoordinatePosition(Coordinate coordinate, Position position) throws Exception {
+        if (position == Position.upper && !this.contains(coordinate.getX(), coordinate.getY() - 2)) {
+            return true;
         }
+
+        if (position == Position.lower && !this.contains(coordinate.getX(), coordinate.getY() + 2)) {
+            return false;
+        }
+
+        throw new Exception("Szar a getunkown");
     }
 
     @Override
