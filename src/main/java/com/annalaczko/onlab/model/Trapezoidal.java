@@ -77,6 +77,7 @@ public class Trapezoidal extends Thread {
             xforRobot = newTrapeze.getCornerForRobot(id).getX() + RobotModel.getRadius() * 2;
         }
 
+        //region trapéz szélére mozgás
         dist = distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY(), null));
 
         double degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (xforRobot - RobotModel.getLocation().getX())));
@@ -91,7 +92,9 @@ public class Trapezoidal extends Thread {
             dist -= RobotModel.speed;
             RobotViewModel.update();
         }
+        //endregion
 
+        //region trapézváltás
         dist = distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(id));
         degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (newTrapeze.getCornerForRobot(id).getX() - RobotModel.getLocation().getX())));
 
@@ -105,7 +108,24 @@ public class Trapezoidal extends Thread {
             dist -= RobotModel.speed;
             RobotViewModel.update();
         }
+        //endregion
 
+        //region trapéz szélére mozgás
+        dist = distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY(), null));
+
+        degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (xforRobot - RobotModel.getLocation().getX())));
+
+        while (dist > 0) {
+            RobotModel.move(degree);
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            dist -= RobotModel.speed;
+            RobotViewModel.update();
+        }
+        //endregion
 
         return id;
     }

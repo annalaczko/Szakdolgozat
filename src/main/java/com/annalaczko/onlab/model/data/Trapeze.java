@@ -80,4 +80,37 @@ public class Trapeze extends Polygon {
 
         return super.contains(x, y);
     }
+
+    public double findCommonCoordinateY(Trapeze other) throws Exception {
+        double t1c1, t1c2, t2c1, t2c2;
+
+        for (int icorners = 0; icorners < 4; icorners++) {
+            for (int jcorners = 0; jcorners < 4; jcorners++) {
+                if (this.xpoints[icorners] == other.xpoints[jcorners]) {
+                    if ((icorners == 0 || icorners == 3) && (jcorners == 1 || jcorners == 2)) {
+                        t1c1 = this.ypoints[0];
+                        t1c2 = this.ypoints[3];
+                        t2c1 = other.ypoints[1];
+                        t2c2 = other.ypoints[2];
+                        double minY = Math.min(t1c2, t2c2);
+                        double maxY = Math.max(t1c1, t2c1);
+
+                        return (minY - maxY) / 2 + maxY;
+                    }
+                    if ((icorners == 1 || icorners == 2) && (jcorners == 3 || jcorners == 0)) {
+                        t1c1 = this.ypoints[1];
+                        t1c2 = this.ypoints[2];
+                        t2c1 = other.ypoints[0];
+                        t2c2 = other.ypoints[3];
+                        double minY = Math.min(t1c2, t2c2);
+                        double maxY = Math.max(t1c1, t2c1);
+
+                        return (minY - maxY) / 2 + maxY;
+                    }
+                }
+            }
+        }
+        throw new Exception("FUCK");
+
+    }
 }
