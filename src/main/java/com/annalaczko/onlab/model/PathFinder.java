@@ -128,7 +128,6 @@ public class PathFinder {
             if (!hasNewNeighbour) {
                 finaltrapezes2.remove(TrapezeGenerator.trapezes.get(id));
                 id = TrapezeGenerator.trapezes.indexOf(finaltrapezes2.get(finaltrapezes2.size() - 1));
-                lastID = TrapezeGenerator.trapezes.indexOf(finaltrapezes2.get(finaltrapezes2.size() - 2));
                 finaltrapezes.add(TrapezeGenerator.trapezes.get(id));
 
                 continue;

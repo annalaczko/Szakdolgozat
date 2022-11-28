@@ -11,6 +11,7 @@ import java.util.Comparator;
 public class RoomModel {
 
     public static ArrayList<Polygon> objects = new ArrayList<>();
+    public static int activeRoomIndex = 0;
     private static int width;
     private static int height;
     private Polygon corners;
@@ -30,11 +31,88 @@ public class RoomModel {
     }
 
     public static void addObject(/*Polygon newObject*/) {
-        // objects.add(newObject);
 
-        int[] xpoints = {100, 200, 600, 400};
+        switch (activeRoomIndex) {
+            case 0:
+                roomRandomObject();
+                break;
+            case 1:
+                roomFirstRNDObjects();
+                break;
+            case 2:
+                room1();
+                break;
+            case 3:
+                roomPanni();
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+    public static void roomRandomObject() {
+        height = 800;
+        width = 800;
+        int[] xpoints = {0, 200, 600, 0};
         int[] ypoints = {400, 200, 100, 500};
 
+
+        objects.add(new Polygon(xpoints, ypoints, 4));
+    }
+
+    public static void room1() {
+        height = 2000;
+        width = 1000;
+        int[] xpoints1 = {50, 150, 250, 150};
+        int[] ypoints1 = {150, 50, 150, 250};
+
+        int[] xpoints2 = {450, 550, 650, 550};
+        int[] ypoints2 = {150, 50, 150, 250};
+
+        int[] xpoints3 = {250, 300, 400, 450, 450, 400, 300, 250};
+        int[] ypoints3 = {300, 250, 250, 300, 350, 400, 400, 350};
+
+        int[] xpoints4 = {150, 550, 550, 150};
+        int[] ypoints4 = {450, 450, 550, 550};
+
+        objects.add(new Polygon(xpoints1, ypoints1, 4));
+        objects.add(new Polygon(xpoints2, ypoints2, 4));
+        objects.add(new Polygon(xpoints3, ypoints3, 8));
+        objects.add(new Polygon(xpoints4, ypoints4, 4));
+    }
+
+    public static void roomPanni() {
+        height = 350;
+        width = 350;
+        int[] xpoints1 = {0, 100, 100, 0};
+        int[] ypoints1 = {0, 00, 200, 200};
+
+        int[] xpoints2 = {150, 300, 300, 150};
+        int[] ypoints2 = {0, 0, 50, 50};
+
+        int[] xpoints3 = {150, 200, 250, 200};
+        int[] ypoints3 = {150, 100, 150, 200};
+
+        int[] xpoints4 = {0, 50, 50, 0};
+        int[] ypoints4 = {250, 250, 350, 350};
+
+        objects.add(new Polygon(xpoints1, ypoints1, 4));
+        objects.add(new Polygon(xpoints2, ypoints2, 4));
+        objects.add(new Polygon(xpoints3, ypoints3, 4));
+        objects.add(new Polygon(xpoints4, ypoints4, 4));
+    }
+
+    public static void roomFirstRNDObjects() {
         int[] xpoints1 = {100, 300, 700, 500};
         int[] ypoints1 = {300, 100, 300, 500};
 
@@ -47,12 +125,10 @@ public class RoomModel {
         int[] xpoints4 = {1200, 1400, 1700, 1800, 1200};
         int[] ypoints4 = {600, 400, 400, 700, 900};
 
-        //objects.add(new Polygon(xpoints, ypoints, 4));
         objects.add(new Polygon(xpoints1, ypoints1, 4));
         objects.add(new Polygon(xpoints2, ypoints2, 4));
         objects.add(new Polygon(xpoints3, ypoints3, 3));
         objects.add(new Polygon(xpoints4, ypoints4, 5));
-
     }
 
     public static double getWidth() {

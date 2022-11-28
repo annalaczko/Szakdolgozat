@@ -62,7 +62,7 @@ public class Trapezoidal extends Thread {
     private int reallocate(Trapeze newTrapeze, Trapeze lastTrapeze) {
         int id = 0;
 
-
+        //megkeresem a legközelebbi koordinátát a következő trapézban
         double dist = distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(0));
         for (int i = 0; i < 4; i++) {
             ///TODO ha túl vékony a trapéz akkor lehet távolabb lesz a "jó" sarok mint egy másik

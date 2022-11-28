@@ -9,7 +9,7 @@ import com.annalaczko.onlab.viewmodel.RoomViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ChoiceBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,29 +20,17 @@ public class NewRoomWindowView implements Initializable {
     private CheckBox IsTurnedOver;
 
     @FXML
-    private TextField roomWidth;
-
-    @FXML
-    private TextField roomHeight;
+    private ChoiceBox choiceBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initChoiceBox();
     }
 
     @FXML
     private void handleOKAction() {
 
-        int width = Integer.parseInt(roomWidth.getText());
-        int height = Integer.parseInt(roomHeight.getText());
-        if (height != 0 && width != 0) {
-            if (height < RobotModel.getRadius() * 2) height = RobotModel.getRadius() * 2;
-            if (width < RobotModel.getRadius() * 2) width = RobotModel.getRadius() * 2;
-            NewRoomViewModel.getStage().close();
-            RoomModel.setCorners(width, height);
-            RoomModel.addObject();
-
-        }
-
+        RoomModel.addObject();
 
         RoomViewModel.initialize();
         RobotViewModel.initialize();
@@ -52,6 +40,26 @@ public class NewRoomWindowView implements Initializable {
             OrientationConverter.convert();
             RobotModel.setCorner(0);
         }
+        NewRoomViewModel.getStage().close();
+
+    }
+
+    private void initChoiceBox() {
+        choiceBox.getItems().add("Hálószoba 1");
+        choiceBox.getItems().add("Hálószoba 2");
+        choiceBox.getItems().add("Hálószoba 3");
+        choiceBox.getItems().add("Hálószoba 4");
+        choiceBox.getItems().add("Mosdó 1");
+        choiceBox.getItems().add("Mosdó 2");
+        choiceBox.getItems().add("Nappali és konyha");
+        choiceBox.getItems().add("Előtér");
+
+        choiceBox.setOnAction((event) -> {
+            int selectedIndex = choiceBox.getSelectionModel().getSelectedIndex();
+            Object selectedItem = choiceBox.getSelectionModel().getSelectedItem();
+
+            RoomModel.activeRoomIndex = selectedIndex;
+        });
 
     }
 }

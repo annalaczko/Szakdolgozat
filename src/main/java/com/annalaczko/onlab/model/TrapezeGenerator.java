@@ -65,7 +65,8 @@ public class TrapezeGenerator {
             }
         }
 
-        if (result == null) throw new Exception("Result in find coordinate is null!");
+
+        if (result == null) System.out.println("AAAAAAAAAAAAAAAAAAA");
 
         return result;
     }
@@ -114,7 +115,6 @@ public class TrapezeGenerator {
                     c1 = findCoordinate(coordinate, Position.upper, true);
                     c2 = findCoordinate(coordinate, Position.lower, true);
 
-
                     if (c1.getObject() != null && c2.getObject() != null) { //RIP ez bajos így, a c0 meg a c3 már overwriteolva lett
                         c0 = c1.getObject().findNeighbourCoordinate(c1, Position.lower);
                         c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
@@ -146,6 +146,20 @@ public class TrapezeGenerator {
                             if (findLastUsedGoodCoordinate(c2, c3, Position.upper) != null) {
                                 c0 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.upper, false);
                                 c3 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.lower, false);
+                            }
+                        }
+                        if (c2.getObject() == null && c2.getObject() == null) {
+                            System.out.println("IN");
+                            System.out.println(c2.getX() + "-" + c2.getY());
+                            System.out.println(c2.getX() + "-" + c2.getY());
+
+                            Coordinate coor = findLastUsedGoodCoordinate(c2, new Coordinate(0, 0), Position.upper);
+
+                            if (coor != null) {
+                                c0 = findCoordinate(coor, Position.upper, false);
+                                c3 = findCoordinate(coor, Position.lower, false);
+                            } else {
+                                throw new Exception("FUCK");
                             }
                         }
                     }
@@ -311,14 +325,18 @@ public class TrapezeGenerator {
 
     public static void startGenerating() throws Exception {
         initCoordinates();
-        //writeCoordinates();
+        writeCoordinates();
         for (int i = 0; i < coordinates.size(); i++) {
+            System.out.println(i);
             if (!isUsed(coordinates.get(i))) {
                 findTrapezeUltimate(i);
             }
         }
         lastTrapeze();
         checkSameTrapezes();
+        writeTrapezes();
+        deleteNarrowTrapezes();
+        writeTrapezes();
 
     }
 
@@ -374,4 +392,21 @@ public class TrapezeGenerator {
         trapezes.remove(copy);
     }
 
+    private static void deleteNarrowTrapezes() {
+        int trapezeSize = trapezes.size();
+
+        for (int i = 0; i < trapezeSize; i++) {
+            Trapeze trapeze = trapezes.get(i);
+            if (Math.abs(trapeze.ypoints[3] - trapeze.ypoints[0]) < RobotModel.getRadius() * 2
+                    || Math.abs(trapeze.ypoints[1] - trapeze.ypoints[2]) < RobotModel.getRadius() * 2
+                    || Math.abs(trapeze.xpoints[0] - trapeze.xpoints[1]) < RobotModel.getRadius() * 2
+                    || Math.abs(trapeze.xpoints[3] - trapeze.xpoints[2]) < RobotModel.getRadius() * 2
+            ) {
+                trapezes.remove(trapeze);
+                i--;
+                trapezeSize--;
+            }
+        }
+
+    }
 }
