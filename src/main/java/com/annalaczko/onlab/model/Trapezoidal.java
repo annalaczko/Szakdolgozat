@@ -41,7 +41,11 @@ public class Trapezoidal extends Thread {
 
         for (int i = 0; i < PathFinder.finaltrapezes.size(); i++) {
             if (lasttetragon != null) {
-                id = reallocate(PathFinder.finaltrapezes.get(i), lasttetragon); //következő trapézhoz megy
+                try {
+                    id = reallocate(PathFinder.finaltrapezes.get(i), lasttetragon); //következő trapézhoz megy
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             int havebeenhereID = TrapezeGenerator.trapezes.indexOf(PathFinder.finaltrapezes.get(i));
@@ -59,7 +63,7 @@ public class Trapezoidal extends Thread {
 
     }
 
-    private int reallocate(Trapeze newTrapeze, Trapeze lastTrapeze) {
+    private int reallocate(Trapeze newTrapeze, Trapeze lastTrapeze) throws Exception {
         int id = 0;
 
         //megkeresem a legközelebbi koordinátát a következő trapézban
@@ -78,9 +82,9 @@ public class Trapezoidal extends Thread {
         }
 
         //region trapéz szélére mozgás
-        dist = distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY(), null));
+        dist = distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.findCommonCoordinateY(lastTrapeze), null));
 
-        double degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (xforRobot - RobotModel.getLocation().getX())));
+        double degree = Math.toDegrees(Math.atan2((newTrapeze.findCommonCoordinateY(lastTrapeze) - RobotModel.getLocation().getY()), (xforRobot - RobotModel.getLocation().getX())));
 
         while (dist > 0) {
             RobotModel.move(degree);
@@ -95,8 +99,16 @@ public class Trapezoidal extends Thread {
         //endregion
 
         //region trapézváltás
-        dist = distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(id));
-        degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (newTrapeze.getCornerForRobot(id).getX() - RobotModel.getLocation().getX())));
+
+
+        if (id == 2 || id == 1) {
+            xforRobot = xforRobot - 2 * RobotModel.getRadius();
+        } else {
+            xforRobot = xforRobot + 2 * RobotModel.getRadius();
+        }
+
+        dist = distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.findCommonCoordinateY(lastTrapeze), null));
+        degree = Math.toDegrees(Math.atan2((newTrapeze.findCommonCoordinateY(lastTrapeze) - RobotModel.getLocation().getY()), (xforRobot - RobotModel.getLocation().getX())));
 
         while (dist > 0) {
             RobotModel.move(degree);
@@ -110,10 +122,19 @@ public class Trapezoidal extends Thread {
         }
         //endregion
 
-        //region trapéz szélére mozgás
-        dist = distance(RobotModel.getLocation(), new Coordinate(xforRobot, newTrapeze.getCornerForRobot(id).getY(), null));
+        dist = distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(0));
+        for (int i = 0; i < 4; i++) {
+            ///TODO ha túl vékony a trapéz akkor lehet távolabb lesz a "jó" sarok mint egy másik
+            if (dist > distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(i))) {
+                id = i;
+                dist = distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(i));
+            }
+        }
 
-        degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (xforRobot - RobotModel.getLocation().getX())));
+        //region trapéz széléről sarokba mozgás
+        dist = distance(RobotModel.getLocation(), newTrapeze.getCornerForRobot(id));
+
+        degree = Math.toDegrees(Math.atan2((newTrapeze.getCornerForRobot(id).getY() - RobotModel.getLocation().getY()), (newTrapeze.getCornerForRobot(id).getX() - RobotModel.getLocation().getX())));
 
         while (dist > 0) {
             RobotModel.move(degree);
