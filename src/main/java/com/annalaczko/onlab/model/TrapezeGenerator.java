@@ -80,6 +80,8 @@ public class TrapezeGenerator {
     private static void findTrapezeUltimate(int i) throws Exception {
 
         Coordinate coordinate = coordinates.get(i);
+
+        Coordinate coor;
         Coordinate[] cs;
 
 
@@ -120,40 +122,49 @@ public class TrapezeGenerator {
                         c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
                         if (c0.getX() > c3.getX()) {
                             c3 = findCoordinate(c0, Position.lower, false);
-                            if (findLastUsedGoodCoordinate(c1, c0, Position.lower) != null) {
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.lower, false);
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.upper, false);
+
+                            coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+
+                            if (coor != null) {
+                                c3 = findCoordinate(coor, Position.lower, false);
+                                c0 = findCoordinate(coor, Position.upper, false);
                             }
                         } else {
                             c0 = findCoordinate(c3, Position.upper, false);
-                            if (findLastUsedGoodCoordinate(c2, c3, Position.upper) != null) {
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.upper, false);
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.lower, false);
+
+                            coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+
+                            if (coor != null) {
+                                c0 = findCoordinate(coor, Position.upper, false);
+                                c3 = findCoordinate(coor, Position.lower, false);
                             }
                         }
                     } else {
                         if (c1.getObject() != null) {
                             c0 = c1.getObject().findNeighbourCoordinate(c1, Position.lower);
                             c3 = new Coordinate(c0.getX(), RoomModel.getHeight());
-                            if (findLastUsedGoodCoordinate(c1, c0, Position.lower) != null) {
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.lower, false);
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.upper, false);
+
+                            coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+
+                            if (coor != null) {
+                                c3 = findCoordinate(coor, Position.lower, false);
+                                c0 = findCoordinate(coor, Position.upper, false);
                             }
                         }
                         if (c2.getObject() != null) {
                             c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
                             c0 = new Coordinate(c3.getX(), 0);
-                            if (findLastUsedGoodCoordinate(c2, c3, Position.upper) != null) {
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.upper, false);
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.lower, false);
+
+                            coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+
+                            if (coor != null) {
+                                c0 = findCoordinate(coor, Position.upper, false);
+                                c3 = findCoordinate(coor, Position.lower, false);
                             }
                         }
                         if (c2.getObject() == null && c2.getObject() == null) {
-                            System.out.println("IN");
-                            System.out.println(c2.getX() + "-" + c2.getY());
-                            System.out.println(c2.getX() + "-" + c2.getY());
 
-                            Coordinate coor = findLastUsedGoodCoordinate(c2, new Coordinate(0, 0), Position.upper);
+                            coor = findLastUsedGoodCoordinate(c2, new Coordinate(0, 0), Position.upper);
 
                             if (coor != null) {
                                 c0 = findCoordinate(coor, Position.upper, false);
@@ -182,25 +193,30 @@ public class TrapezeGenerator {
                         if (c1.getObject() != null) {
                             if (c1.getObject().findNeighbourCoordinate(c1, Position.lower).getX() > c3.getX()) {
                                 c0 = c1.getObject().findNeighbourCoordinate(c1, Position.lower);
-                                if (findLastUsedGoodCoordinate(c2, c0, Position.upper) != null) {
-                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c2, c0, Position.upper), Position.lower, false);
-                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c2, c0, Position.upper), Position.upper, false);
+
+                                coor = findLastUsedGoodCoordinate(c2, c0, Position.upper);
+
+                                if (coor != null) {
+                                    c3 = findCoordinate(coor, Position.lower, false);
+                                    c0 = findCoordinate(coor, Position.upper, false);
                                 } else {
                                     c3 = findCoordinate(c0, Position.lower, false);
                                 }
                             } else {
-                                if (findLastUsedGoodCoordinate(c2, c3, Position.upper) != null) {
+                                coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+                                if (coor != null) {
 
-                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.upper, false);
-                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.lower, false);
+                                    c0 = findCoordinate(coor, Position.upper, false);
+                                    c3 = findCoordinate(coor, Position.lower, false);
                                 } else {
                                     c0 = findCoordinate(c3, Position.upper, false);
                                 }
                             }
                         } else {
-                            if (findLastUsedGoodCoordinate(c2, c3, Position.upper) != null) {
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.upper, false);
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c2, c3, Position.upper), Position.lower, false);
+                            coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+                            if (coor != null) {
+                                c0 = findCoordinate(coor, Position.upper, false);
+                                c3 = findCoordinate(coor, Position.lower, false);
                             } else {
                                 c0 = findCoordinate(c3, Position.upper, false);
                             }
@@ -226,25 +242,28 @@ public class TrapezeGenerator {
                         if (c2.getObject() != null) {
                             if (c2.getObject().findNeighbourCoordinate(c2, Position.upper).getX() > c0.getX()) {
                                 c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
-                                if (findLastUsedGoodCoordinate(c1, c3, Position.lower) != null) {
-                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.lower), Position.upper, false);
-                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c3, Position.lower), Position.lower, false);
+
+                                coor = findLastUsedGoodCoordinate(c1, c3, Position.lower);
+                                if (coor != null) {
+                                    c0 = findCoordinate(coor, Position.upper, false);
+                                    c3 = findCoordinate(coor, Position.lower, false);
                                 } else {
                                     c0 = findCoordinate(c3, Position.upper, false);
                                 }
                             } else {
-                                if (findLastUsedGoodCoordinate(c1, c0, Position.lower) != null) {
-
-                                    c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.lower, false);
-                                    c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.upper, false);
+                                coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+                                if (coor != null) {
+                                    c3 = findCoordinate(coor, Position.lower, false);
+                                    c0 = findCoordinate(coor, Position.upper, false);
                                 } else {
                                     c3 = findCoordinate(c0, Position.lower, false);
                                 }
                             }
                         } else {
-                            if (findLastUsedGoodCoordinate(c1, c0, Position.lower) != null) {
-                                c3 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.lower, false);
-                                c0 = findCoordinate(findLastUsedGoodCoordinate(c1, c0, Position.lower), Position.upper, false);
+                            coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+                            if (coor != null) {
+                                c3 = findCoordinate(coor, Position.lower, false);
+                                c0 = findCoordinate(coor, Position.upper, false);
                             } else {
                                 c3 = findCoordinate(c0, Position.lower, false);
                             }
