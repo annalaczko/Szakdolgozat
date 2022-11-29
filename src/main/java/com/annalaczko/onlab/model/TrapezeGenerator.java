@@ -45,7 +45,9 @@ public class TrapezeGenerator {
                 if (object.contains((int) coordinate.getX(), yCoordinate)) {
                     done = true;
 
+
                     result = new Coordinate(coordinate.getX(), yCoordinate, object);
+
                     if (result.getX() == object.getFirstCorner().getX() && isLastColumn) {
                         done = false;
                     }
@@ -83,6 +85,9 @@ public class TrapezeGenerator {
 
         Coordinate coor;
         Coordinate[] cs;
+        if (i == 23) {
+            System.out.println("23--");
+        }
 
 
         if (i == 0) {
@@ -109,6 +114,7 @@ public class TrapezeGenerator {
                 trapezes.add(new Trapeze(cs));
             } else {
                 if (!openObjects.contains(coordinate.getObject())) {
+
                     openObjects.add(coordinate.getObject());
                     Coordinate c0, c1, c2, c3;
                     c0 = null;
@@ -123,7 +129,7 @@ public class TrapezeGenerator {
                         if (c0.getX() > c3.getX()) {
                             c3 = findCoordinate(c0, Position.lower, false);
 
-                            coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+                            coor = findLastUsedGoodCoordinate(c1, c0, c3, Position.lower);
 
                             if (coor != null) {
                                 c3 = findCoordinate(coor, Position.lower, false);
@@ -132,7 +138,7 @@ public class TrapezeGenerator {
                         } else {
                             c0 = findCoordinate(c3, Position.upper, false);
 
-                            coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+                            coor = findLastUsedGoodCoordinate(c2, c3, c0, Position.upper);
 
                             if (coor != null) {
                                 c0 = findCoordinate(coor, Position.upper, false);
@@ -144,7 +150,7 @@ public class TrapezeGenerator {
                             c0 = c1.getObject().findNeighbourCoordinate(c1, Position.lower);
                             c3 = new Coordinate(c0.getX(), RoomModel.getHeight());
 
-                            coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+                            coor = findLastUsedGoodCoordinate(c1, c0, c3, Position.lower);
 
                             if (coor != null) {
                                 c3 = findCoordinate(coor, Position.lower, false);
@@ -155,7 +161,7 @@ public class TrapezeGenerator {
                             c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
                             c0 = new Coordinate(c3.getX(), 0);
 
-                            coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+                            coor = findLastUsedGoodCoordinate(c2, c3, c0, Position.upper);
 
                             if (coor != null) {
                                 c0 = findCoordinate(coor, Position.upper, false);
@@ -166,7 +172,7 @@ public class TrapezeGenerator {
                             System.out.println(c1.getX() + "-" + c1.getY());
                             System.out.println(c2.getX() + "-" + c2.getY());
 
-                            coor = findLastUsedGoodCoordinate(c2, new Coordinate(0, 0), Position.upper);
+                            coor = findLastUsedGoodCoordinate(c2, new Coordinate(0, RoomModel.getHeight()), new Coordinate(0, 0), Position.upper);
 
                             if (coor != null) {
                                 c0 = findCoordinate(coor, Position.upper, false);
@@ -187,16 +193,14 @@ public class TrapezeGenerator {
                     Coordinate c0, c1, c2, c3;
 
                     if (coordinate.getObject().isCoordinatePosition(coordinate, Position.upper)) {
-
                         c2 = coordinate;
                         c1 = findCoordinate(coordinate, Position.upper, true);
                         c3 = c2.getObject().coordinatesAroundTheClock.get(c2.getObject().findCornerIdAroundTheClock(c2) - 1);
 
                         if (c1.getObject() != null) {
-                            if (c1.getObject().findNeighbourCoordinate(c1, Position.lower).getX() > c3.getX()) {
-                                c0 = c1.getObject().findNeighbourCoordinate(c1, Position.lower);
-
-                                coor = findLastUsedGoodCoordinate(c2, c0, Position.upper);
+                            c0 = c1.getObject().findNeighbourCoordinate(c1, Position.lower);
+                            if (c0.getX() > c3.getX()) {
+                                coor = findLastUsedGoodCoordinate(c2, c3, c0, Position.upper);
 
                                 if (coor != null) {
                                     c3 = findCoordinate(coor, Position.lower, false);
@@ -205,7 +209,7 @@ public class TrapezeGenerator {
                                     c3 = findCoordinate(c0, Position.lower, false);
                                 }
                             } else {
-                                coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+                                coor = findLastUsedGoodCoordinate(c2, c3, c0, Position.upper);
                                 if (coor != null) {
 
                                     c0 = findCoordinate(coor, Position.upper, false);
@@ -215,7 +219,7 @@ public class TrapezeGenerator {
                                 }
                             }
                         } else {
-                            coor = findLastUsedGoodCoordinate(c2, c3, Position.upper);
+                            coor = findLastUsedGoodCoordinate(c2, c3, new Coordinate(0, 0), Position.upper);
                             if (coor != null) {
                                 c0 = findCoordinate(coor, Position.upper, false);
                                 c3 = findCoordinate(coor, Position.lower, false);
@@ -233,6 +237,7 @@ public class TrapezeGenerator {
 
                         //System.out.println("LOWER COORDINATE: " + coordinate.getX() + "-" + coordinate.getY());
 
+
                         c1 = coordinate;
                         c2 = findCoordinate(coordinate, Position.lower, true);
                         int index = c1.getObject().findCornerIdAroundTheClock(c1);
@@ -241,11 +246,11 @@ public class TrapezeGenerator {
                             index = -1;
                         }
                         c0 = c1.getObject().coordinatesAroundTheClock.get(index + 1);
-                        if (c2.getObject() != null) {
-                            if (c2.getObject().findNeighbourCoordinate(c2, Position.upper).getX() > c0.getX()) {
-                                c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
 
-                                coor = findLastUsedGoodCoordinate(c1, c3, Position.lower);
+                        if (c2.getObject() != null) {
+                            c3 = c2.getObject().findNeighbourCoordinate(c2, Position.upper);
+                            if (c3.getX() > c0.getX()) {
+                                coor = findLastUsedGoodCoordinate(c1, c3, c0, Position.lower);
                                 if (coor != null) {
                                     c0 = findCoordinate(coor, Position.upper, false);
                                     c3 = findCoordinate(coor, Position.lower, false);
@@ -253,7 +258,7 @@ public class TrapezeGenerator {
                                     c0 = findCoordinate(c3, Position.upper, false);
                                 }
                             } else {
-                                coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+                                coor = findLastUsedGoodCoordinate(c1, c0, c3, Position.lower);
                                 if (coor != null) {
                                     c3 = findCoordinate(coor, Position.lower, false);
                                     c0 = findCoordinate(coor, Position.upper, false);
@@ -262,7 +267,7 @@ public class TrapezeGenerator {
                                 }
                             }
                         } else {
-                            coor = findLastUsedGoodCoordinate(c1, c0, Position.lower);
+                            coor = findLastUsedGoodCoordinate(c1, c0, new Coordinate(0, RoomModel.getHeight()), Position.lower);
                             if (coor != null) {
                                 c3 = findCoordinate(coor, Position.lower, false);
                                 c0 = findCoordinate(coor, Position.upper, false);
@@ -286,25 +291,29 @@ public class TrapezeGenerator {
         }
     }
 
-    private static Coordinate findLastUsedGoodCoordinate(Coordinate original, Coordinate neighbourAtDifferentX, Position position) {
+    private static Coordinate findLastUsedGoodCoordinate(Coordinate original, Coordinate neighbourAtDifferentX, Coordinate neighbourAtDifferentX2, Position position) {
 //biztos jó magasságban van az y?
         Coordinate result = null;
         switch (position) {
             case upper:
                 for (int i = usedCoordinates.size() - 1; i >= 0; i--) {
-                    if ((usedCoordinates.get(i).getY() < original.getY() || usedCoordinates.get(i).getY() < neighbourAtDifferentX.getY())
+                    if (usedCoordinates.get(i).getY() <= neighbourAtDifferentX.getY()
+                            && usedCoordinates.get(i).getY() >= neighbourAtDifferentX2.getY()
                             && usedCoordinates.get(i).getX() < original.getX()
                             && usedCoordinates.get(i).getX() > neighbourAtDifferentX.getX()
                             && usedCoordinates.get(i).getObject() != original.getObject()
                             && usedCoordinates.get(i).getObject() != neighbourAtDifferentX.getObject()) {
                         result = usedCoordinates.get(i);
+                        System.out.println(usedCoordinates.get(i).getX() < original.getX());
+
                         break;
                     }
                 }
                 break;
             case lower:
                 for (int i = usedCoordinates.size() - 1; i >= 0; i--) {
-                    if ((usedCoordinates.get(i).getY() > original.getY() || usedCoordinates.get(i).getY() > neighbourAtDifferentX.getY())
+                    if (usedCoordinates.get(i).getY() >= neighbourAtDifferentX.getY()
+                            && usedCoordinates.get(i).getY() <= neighbourAtDifferentX2.getY()
                             && usedCoordinates.get(i).getX() < original.getX()
                             && usedCoordinates.get(i).getX() > neighbourAtDifferentX.getX()
                             && usedCoordinates.get(i).getObject() != original.getObject()
@@ -318,7 +327,11 @@ public class TrapezeGenerator {
                 break;
         }
 
-        if (result != null && openObjects.contains(result.getObject())) return null;
+        if (result != null && openObjects.contains(result.getObject())) {
+            return null;
+
+        }
+
 
         return result;
     }
@@ -348,16 +361,17 @@ public class TrapezeGenerator {
         initCoordinates();
         writeCoordinates();
         for (int i = 0; i < coordinates.size(); i++) {
-            System.out.println(i);
+
             if (!isUsed(coordinates.get(i))) {
                 findTrapezeUltimate(i);
+            } else {
+                System.out.println(i);
             }
         }
         lastTrapeze();
         checkSameTrapezes();
         deleteNarrowTrapezes();
         writeTrapezes();
-
     }
 
     private static void lastTrapeze() {

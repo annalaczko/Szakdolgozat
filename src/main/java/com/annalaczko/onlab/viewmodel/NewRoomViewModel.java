@@ -12,7 +12,7 @@ public class NewRoomViewModel {
         stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(NewRoomViewModel.class.getResource("/view/new-room-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 100);
+        Scene scene = new Scene(fxmlLoader.load(), 500, 150);
         stage.setTitle("New Room");
         stage.setScene(scene);
         stage.show();

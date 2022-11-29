@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="83.0" prefWidth="441.0"
             xmlns="http://javafx.com/javafx/11.0.2" fx:controller="com.annalaczko.onlab.view.NewRoomWindowView">
     <children>
         <BorderPane layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                    prefHeight="104.0" prefWidth="441.0">
+                    prefHeight="151.0" prefWidth="441.0">
             <top>
                 <Label alignment="CENTER" prefHeight="24.0" prefWidth="265.0"
                        text="Kérlek válaszd ki a bejárandó szobát!" BorderPane.alignment="TOP_CENTER"/>
             </top>
             <bottom>
-                <Pane prefHeight="47.0" prefWidth="432.0" BorderPane.alignment="CENTER">
+                <Pane prefHeight="47.0" prefWidth="441.0" BorderPane.alignment="CENTER">
                     <children>
                         <Button fx:id="buttonOK" alignment="CENTER" layoutX="200.0" layoutY="12.0"
                                 mnemonicParsing="false" onAction="#handleOKAction" text="Ok"/>
@@ -25,7 +22,15 @@
                 </Pane>
             </bottom>
             <center>
-                <ChoiceBox fx:id="choiceBox" prefWidth="150.0" BorderPane.alignment="CENTER"/>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
+                        <Label text="Robot sebesség:"/>
+                        <Slider fx:id="slider" blockIncrement="1.0" majorTickUnit="1.0" max="20.0" min="1.0"
+                                minorTickCount="0" prefHeight="14.0" prefWidth="391.0" showTickLabels="true"
+                                showTickMarks="true"/>
+                    </children>
+                </VBox>
             </center>
         </BorderPane>
     </children>

@@ -81,6 +81,12 @@ public class Trapeze extends Polygon {
         return super.contains(x, y);
     }
 
+    public void writeTrapeze() {
+        for (int i = 0; i < 4; i++) {
+            System.out.println(xpoints[i] + "-" + ypoints[i]);
+        }
+    }
+
     public double findCommonCoordinateY(Trapeze other) throws Exception {
         double t1c1, t1c2, t2c1, t2c2;
 

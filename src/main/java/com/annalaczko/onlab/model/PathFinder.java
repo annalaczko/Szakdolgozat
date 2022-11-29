@@ -38,7 +38,7 @@ public class PathFinder {
 
 
         depthFirstSearch();
-        //writeTrapezes();
+        writeTrapezes();
         System.out.println("FINAL SIZE: " + finaltrapezes.size());
         System.out.println("TRAPEZE SIZE: " + TrapezeGenerator.trapezes.size());
     }
