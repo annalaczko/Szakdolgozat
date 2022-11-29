@@ -5,7 +5,7 @@ package com.annalaczko.onlab.model.data;
  */
 
 public class RobotModel {
-    public static double speed = 3; //centimeters per 10 milliseconds
+    public static double speed = 2; //centimeters per 10 milliseconds
     private static int radius = 15; //centimeters
     private static Coordinate location = new Coordinate(radius, radius, null);
     private static int corner = 0;
@@ -39,6 +39,10 @@ public class RobotModel {
 
     public static Coordinate getLocation() {
         return location;
+    }
+
+    public static void setLocation(Coordinate location) {
+        RobotModel.location = location;
     }
 
     public static void reset() {

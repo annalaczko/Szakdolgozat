@@ -162,7 +162,9 @@ public class TrapezeGenerator {
                                 c3 = findCoordinate(coor, Position.lower, false);
                             }
                         }
-                        if (c2.getObject() == null && c2.getObject() == null) {
+                        if (c1.getObject() == null && c2.getObject() == null) {
+                            System.out.println(c1.getX() + "-" + c1.getY());
+                            System.out.println(c2.getX() + "-" + c2.getY());
 
                             coor = findLastUsedGoodCoordinate(c2, new Coordinate(0, 0), Position.upper);
 
@@ -284,17 +286,17 @@ public class TrapezeGenerator {
         }
     }
 
-    private static Coordinate findLastUsedGoodCoordinate(Coordinate original, Coordinate neighbour, Position position) {
+    private static Coordinate findLastUsedGoodCoordinate(Coordinate original, Coordinate neighbourAtDifferentX, Position position) {
 //biztos jó magasságban van az y?
         Coordinate result = null;
         switch (position) {
             case upper:
                 for (int i = usedCoordinates.size() - 1; i >= 0; i--) {
-                    if ((usedCoordinates.get(i).getY() < original.getY() || usedCoordinates.get(i).getY() < neighbour.getY())
+                    if ((usedCoordinates.get(i).getY() < original.getY() || usedCoordinates.get(i).getY() < neighbourAtDifferentX.getY())
                             && usedCoordinates.get(i).getX() < original.getX()
-                            && usedCoordinates.get(i).getX() > neighbour.getX()
+                            && usedCoordinates.get(i).getX() > neighbourAtDifferentX.getX()
                             && usedCoordinates.get(i).getObject() != original.getObject()
-                            && usedCoordinates.get(i).getObject() != neighbour.getObject()) {
+                            && usedCoordinates.get(i).getObject() != neighbourAtDifferentX.getObject()) {
                         result = usedCoordinates.get(i);
                         break;
                     }
@@ -302,11 +304,11 @@ public class TrapezeGenerator {
                 break;
             case lower:
                 for (int i = usedCoordinates.size() - 1; i >= 0; i--) {
-                    if ((usedCoordinates.get(i).getY() > original.getY() || usedCoordinates.get(i).getY() > neighbour.getY())
+                    if ((usedCoordinates.get(i).getY() > original.getY() || usedCoordinates.get(i).getY() > neighbourAtDifferentX.getY())
                             && usedCoordinates.get(i).getX() < original.getX()
-                            && usedCoordinates.get(i).getX() > neighbour.getX()
+                            && usedCoordinates.get(i).getX() > neighbourAtDifferentX.getX()
                             && usedCoordinates.get(i).getObject() != original.getObject()
-                            && usedCoordinates.get(i).getObject() != neighbour.getObject()) {
+                            && usedCoordinates.get(i).getObject() != neighbourAtDifferentX.getObject()) {
                         result = usedCoordinates.get(i);
                         break;
                     }
@@ -353,7 +355,6 @@ public class TrapezeGenerator {
         }
         lastTrapeze();
         checkSameTrapezes();
-        writeTrapezes();
         deleteNarrowTrapezes();
         writeTrapezes();
 
@@ -401,7 +402,7 @@ public class TrapezeGenerator {
     private static void deleteSameTrapezes(int original, int copy) {
         if (original != copy) {
             for (int k = 0; k < 4; k++) {
-                if (trapezes.get(original).xpoints[k] != trapezes.get(copy).xpoints[k] || trapezes.get(original).ypoints[k] != trapezes.get(copy).ypoints[k])
+                if (Math.abs(trapezes.get(original).xpoints[k] - trapezes.get(copy).xpoints[k]) > 2 || Math.abs(trapezes.get(original).ypoints[k] - trapezes.get(copy).ypoints[k]) > 2)
                     return;
 
             }

@@ -31,9 +31,14 @@ public class NewRoomWindowView implements Initializable {
     private void handleOKAction() {
 
         RoomModel.addObject();
+        System.out.println("ADDED");
 
         RoomViewModel.initialize();
+
+        System.out.println("Room");
         RobotViewModel.initialize();
+
+        System.out.println("Robot");
         if (IsTurnedOver.isSelected()) {
             OrientationConverter.turned = true;
 
@@ -56,8 +61,6 @@ public class NewRoomWindowView implements Initializable {
 
         choiceBox.setOnAction((event) -> {
             int selectedIndex = choiceBox.getSelectionModel().getSelectedIndex();
-            Object selectedItem = choiceBox.getSelectionModel().getSelectedItem();
-
             RoomModel.activeRoomIndex = selectedIndex;
         });
 

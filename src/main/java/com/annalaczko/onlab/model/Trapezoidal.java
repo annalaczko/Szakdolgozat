@@ -33,6 +33,9 @@ public class Trapezoidal extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        RobotModel.setLocation(PathFinder.finaltrapezes.get(0).getCornerForRobot(0));
+
         initHavebeenhere();
 
         Trapeze lasttetragon = null;
