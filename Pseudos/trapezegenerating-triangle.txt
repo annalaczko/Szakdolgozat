@@ -1,0 +1,76 @@
+Lista koordináták = a háromszög koordinátái x szerint növekvő sorrendben
+Lista trapézok = legenerált trapézok listája
+szoba.magasság = a szoba magassága
+szoba.hossz = a szoba hossza
+Koordináta.fenn = függvény, ami akkor igaz, ha a koordináta feletti koordináta (ami csak Y-ban különbözik) nem a koordináta objektumán belül található meg
+Koordináta.lenn = függvény, ami akkor igaz, ha a koordináta alatti koordináta (ami csak Y-ban különbözik) nem a koordináta objektumán belül található meg
+előzőKoor = aktív koordinátát megelőző koordináta
+elsőKoordináta = a háromszög legelső koordinátája
+utolsóKoordináta = a háromszög legutolsó koordinátája
+
+ISMÉTLÉS (Koordináta koor: koordináták){
+    HA (koor == első koordináta){
+        trapéz = {0     ,   0
+                  koor.X,   0
+                  koor.X, szoba.magasság
+                  0     , szoba.magasság  
+                }
+    } 
+
+    trapézok.hozzáad(trapéz)
+
+    HA (koor == második koordináta){
+        HA (koor.fenn){
+            trapéz = {  elsőKoordináta.X,    0
+                        koor.X          ,   0
+                        koor.X          , koor.Y
+                        elsőKoordináta.X, elsőKoordináta.Y  
+                    }
+        } EGYÉBKÉNT {
+            trapéz = {  elsőKoordináta.X, elsőKoordináta.Y   
+                        koor.X          , koor.Y 
+                        koor.X          , szoba.magasság
+                        elsőKoordináta.X, szoba.magasság
+                    }
+        }
+    } 
+
+    trapézok.hozzáad(trapéz)
+    
+    HA (koor == harmadik koordináta){
+        HA (előzőKoor.fenn){
+            trapéz = {  előzőKoor.X,    0
+                        koor.X     ,   0
+                        koor.X     , koor.Y
+                        előzőKoor.X, előzőKoor.Y  
+                    }
+            trapézok.hozzáad(trapéz)
+            trapéz = {  elsőKoordináta.X, elsőKoordináta.Y
+                        koor.X          , koor.Y  
+                        koor.X          , szoba.magasság
+                        elsőKoordináta.X, szoba.magasság
+                    }        
+        } EGYÉBKÉNT {
+            trapéz = {  előzőKoor.X, előzőKoor.Y 
+                        koor.X     , koor.Y
+                        koor.X     , szoba.magasság
+                        előzőKoor.X, szoba.magasság 
+                    }
+            trapézok.hozzáad(trapéz)
+            trapéz = {  elsőKoordináta.X, 0
+                        koor.X          , 0
+                        koor.X          , koor.Y 
+                        elsőKoordináta.X, elsőKoordináta.Y
+        }
+        trapézok.hozzáad(trapéz)
+    }     
+}
+
+
+trapéz = {  utolsóKoordináta.X  , 0
+            szoba.hossz         , 0
+            szoba.hossz         , szoba.magasság
+            utolsóKoordináta.X  , szoba.magasság  
+}
+
+trapézok.hozzáad(trapéz)

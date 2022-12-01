@@ -41,14 +41,11 @@ public class NewRoomWindowView implements Initializable {
     private void handleOKAction() {
 
         RoomModel.addObject();
-        System.out.println("ADDED");
 
         RoomViewModel.initialize();
 
-        System.out.println("Room");
         RobotViewModel.initialize();
 
-        System.out.println("Robot");
         if (IsTurnedOver.isSelected()) {
             OrientationConverter.turned = true;
 

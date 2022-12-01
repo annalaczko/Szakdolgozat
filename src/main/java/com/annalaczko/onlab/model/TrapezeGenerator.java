@@ -85,9 +85,6 @@ public class TrapezeGenerator {
 
         Coordinate coor;
         Coordinate[] cs;
-        if (i == 23) {
-            System.out.println("23--");
-        }
 
 
         if (i == 0) {
@@ -371,7 +368,7 @@ public class TrapezeGenerator {
         lastTrapeze();
         checkSameTrapezes();
         deleteNarrowTrapezes();
-        writeTrapezes();
+        //writeTrapezes();
     }
 
     private static void lastTrapeze() {
