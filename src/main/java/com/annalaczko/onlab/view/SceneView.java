@@ -5,7 +5,6 @@ import com.annalaczko.onlab.model.Trapezoidal;
 import com.annalaczko.onlab.model.data.RoomModel;
 import com.annalaczko.onlab.viewmodel.RobotViewModel;
 import com.annalaczko.onlab.viewmodel.RoomViewModel;
-import com.annalaczko.onlab.viewmodel.TrapezesViewModel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -98,24 +97,6 @@ public class SceneView {
             objects.add(new Polygon(points));
         }
         pane.getChildren().addAll(objects);
-    }
-
-    public static void initTrapezes() {
-        Polygon polygon;
-        for (java.awt.Polygon object : TrapezesViewModel.getObjects()) {
-            double[] points = new double[object.npoints * 2];
-            for (int i = 0; i < object.npoints; i++) {
-                points[2 * i] = object.xpoints[i];
-                points[2 * i + 1] = object.ypoints[i];
-            }
-            polygon = new Polygon(points);
-            polygon.setFill(Color.YELLOW);
-            polygon.setStroke(Color.DARKGRAY);
-            polygon.setVisible(true);
-            trapezes.add(polygon);
-            System.out.println("Benn vagyok");
-        }
-        pane.getChildren().addAll(trapezes);
     }
 
     public static void moveRobot() {

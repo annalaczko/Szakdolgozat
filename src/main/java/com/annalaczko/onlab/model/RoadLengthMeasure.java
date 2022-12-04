@@ -1,6 +1,8 @@
 package com.annalaczko.onlab.model;
 
-public class Timer extends Thread {
+import com.annalaczko.onlab.model.data.RobotModel;
+
+public class RoadLengthMeasure extends Thread {
 
     private double ms = 0;
 
@@ -24,6 +26,6 @@ public class Timer extends Thread {
 
     public void over() {
         notOver = false;
-        System.out.println("Time spent" + ms);
+        System.out.println("Length" + ms * RobotModel.speed / 20 / 100);
     }
 }

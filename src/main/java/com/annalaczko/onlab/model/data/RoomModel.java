@@ -34,10 +34,10 @@ public class RoomModel {
 
         switch (activeRoomIndex) {
             case 0:
-                roomRandomObject();
+                roomSzulok();
                 break;
             case 1:
-                roomFirstRNDObjects();
+                roomEszti();
                 break;
             case 2:
                 roomMatyi();
@@ -49,12 +49,13 @@ public class RoomModel {
                 room1();
                 break;
             case 5:
+                roomRandomObject();
                 break;
             case 6:
                 nappali();
                 break;
             case 7:
-
+                roomFirstRNDObjects();
                 break;
             default:
                 break;
@@ -73,20 +74,68 @@ public class RoomModel {
         objects.add(new Polygon(xpoints, ypoints, 4));
     }
 
+    public static void roomEszti() {
+        height = 350;
+        width = 400;
+        int[] xpoints1 = {0, 250, 250, 0};
+        int[] ypoints1 = {0, 0, 100, 100};
+
+        int[] xpoints2 = {0, 200, 200, 0};
+        int[] ypoints2 = {250, 250, 350, 350};
+
+        int[] xpoints3 = {200, 250, 250, 200};
+        int[] ypoints3 = {300, 300, 350, 350};
+
+        int[] xpoints4 = {350, 400, 400, 350};
+        int[] ypoints4 = {0, 0, 200, 200};
+
+        int[] xpoints5 = {310, 400, 400, 310};
+        int[] ypoints5 = {200, 200, 300, 300};
+
+
+        objects.add(new Polygon(xpoints1, ypoints1, 4));
+        objects.add(new Polygon(xpoints2, ypoints2, 4));
+        objects.add(new Polygon(xpoints3, ypoints3, 4));
+        objects.add(new Polygon(xpoints4, ypoints4, 4));
+        objects.add(new Polygon(xpoints5, ypoints5, 4));
+    }
+
+    public static void roomSzulok() {
+        height = 350;
+        width = 300;
+        int[] xpoints1 = {0, 50, 50, 0};
+        int[] ypoints1 = {0, 0, 100, 100};
+
+        int[] xpoints3 = {50, 100, 100, 50};
+        int[] ypoints3 = {0, 0, 50, 50};
+
+        int[] xpoints4 = {50, 200, 200, 50};
+        int[] ypoints4 = {150, 150, 350, 350};
+
+        int[] xpoints2 = {250, 300, 300, 250};
+        int[] ypoints2 = {100, 100, 350, 350};
+
+
+        objects.add(new Polygon(xpoints1, ypoints1, 4));
+        objects.add(new Polygon(xpoints2, ypoints2, 4));
+        objects.add(new Polygon(xpoints3, ypoints3, 4));
+        objects.add(new Polygon(xpoints4, ypoints4, 4));
+    }
+
     public static void roomMatyi() {
         height = 350;
         width = 300;
-        int[] xpoints1 = {0,50,50,0};
-        int[] ypoints1 = {0,0,200,200};
+        int[] xpoints1 = {0, 50, 50, 0};
+        int[] ypoints1 = {0, 0, 200, 200};
 
-        int[] xpoints3 = {90, 125,160,125};
-        int[] ypoints3 = {100, 65,100, 135};
+        int[] xpoints3 = {90, 125, 160, 125};
+        int[] ypoints3 = {100, 65, 100, 135};
 
-        int[] xpoints4 = {200,300,300,200};
-        int[] ypoints4 = {0,0,300,300};
+        int[] xpoints4 = {200, 300, 300, 200};
+        int[] ypoints4 = {0, 0, 300, 300};
 
-        int[] xpoints2 = {150,300,300,150};
-        int[] ypoints2 = {300,300,350,350};
+        int[] xpoints2 = {150, 300, 300, 150};
+        int[] ypoints2 = {300, 300, 350, 350};
 
 
         objects.add(new Polygon(xpoints1, ypoints1, 4));

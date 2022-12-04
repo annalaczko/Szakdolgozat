@@ -24,9 +24,9 @@ public class Trapezoidal extends Thread {
 
     @Override
     public void run() {
-        Timer timer = new Timer();
+        RoadLengthMeasure roadLengthMeasure = new RoadLengthMeasure();
 
-        timer.start();
+        roadLengthMeasure.start();
 
         try {
             PathFinder.Calculate();
@@ -40,7 +40,7 @@ public class Trapezoidal extends Thread {
 
         Trapeze lasttetragon = null;
 
-        timer.writeTime();
+        roadLengthMeasure.writeTime();
 
         for (int i = 0; i < PathFinder.finaltrapezes.size(); i++) {
             if (lasttetragon != null) {
@@ -61,7 +61,7 @@ public class Trapezoidal extends Thread {
 
             lasttetragon = PathFinder.finaltrapezes.get(i);
         }
-        timer.over();
+        roadLengthMeasure.over();
 
 
     }
