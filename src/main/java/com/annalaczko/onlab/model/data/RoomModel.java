@@ -40,12 +40,13 @@ public class RoomModel {
                 roomFirstRNDObjects();
                 break;
             case 2:
-                room1();
+                roomMatyi();
                 break;
             case 3:
                 roomPanni();
                 break;
             case 4:
+                room1();
                 break;
             case 5:
                 break;
@@ -70,6 +71,28 @@ public class RoomModel {
 
 
         objects.add(new Polygon(xpoints, ypoints, 4));
+    }
+
+    public static void roomMatyi() {
+        height = 350;
+        width = 300;
+        int[] xpoints1 = {0,50,50,0};
+        int[] ypoints1 = {0,0,200,200};
+
+        int[] xpoints3 = {90, 125,160,125};
+        int[] ypoints3 = {100, 65,100, 135};
+
+        int[] xpoints4 = {200,300,300,200};
+        int[] ypoints4 = {0,0,300,300};
+
+        int[] xpoints2 = {150,300,300,150};
+        int[] ypoints2 = {300,300,350,350};
+
+
+        objects.add(new Polygon(xpoints1, ypoints1, 4));
+        objects.add(new Polygon(xpoints2, ypoints2, 4));
+        objects.add(new Polygon(xpoints3, ypoints3, 4));
+        objects.add(new Polygon(xpoints4, ypoints4, 4));
     }
 
     public static void room1() {

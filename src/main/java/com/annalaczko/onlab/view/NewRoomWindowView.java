@@ -55,7 +55,6 @@ public class NewRoomWindowView implements Initializable {
         NewRoomViewModel.getStage().close();
 
     }
-
     private void initChoiceBox() {
         choiceBox.getItems().add("Hálószoba 1");
         choiceBox.getItems().add("Hálószoba 2");
